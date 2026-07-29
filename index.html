@@ -467,12 +467,13 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
         <table>
           <thead>
             <tr>
-              <th style="width:24%">Component</th>
-              <th style="width:9%">Tier</th>
-              <th style="width:11%">UIT</th>
-              <th style="width:10%">Priority</th>
-              <th style="width:14%">Status</th>
-              <th style="width:32%">Notes</th>
+              <th style="width:22%">Component</th>
+              <th style="width:8%">Tier</th>
+              <th style="width:9%">UIT</th>
+              <th style="width:8%">Priority</th>
+              <th style="width:12%">Status</th>
+              <th style="width:16%">UIT Component</th>
+              <th style="width:25%">Notes</th>
             </tr>
           </thead>
           <tbody id="trk-body"></tbody>
@@ -1028,6 +1029,7 @@ document.addEventListener('mousemove', function(e){
 
 const TRACKER_STATUS = {};
 const TRACKER_NOTES = {};
+window.TRACKER_UIT_COMP = {};
 
 function statusBadgeSelect(name, current) {
   const opts = [
@@ -1081,6 +1083,18 @@ function buildTrackerRows() {
     const statusTd = document.createElement('td');
     statusTd.appendChild(statusBadgeSelect(name, TRACKER_STATUS[name]));
 
+    const uitCompTd = document.createElement('td');
+    const uitCompInput = document.createElement('input');
+    uitCompInput.type = 'text';
+    uitCompInput.className = 'trk-notes-input';
+    uitCompInput.placeholder = 'e.g. Buttons/Button';
+    uitCompInput.value = TRACKER_UIT_COMP ? (TRACKER_UIT_COMP[name] || '') : '';
+    uitCompInput.addEventListener('input', function() {
+      if(!window.TRACKER_UIT_COMP) window.TRACKER_UIT_COMP = {};
+      window.TRACKER_UIT_COMP[name] = this.value;
+    });
+    uitCompTd.appendChild(uitCompInput);
+
     const notesTd = document.createElement('td');
     const notesInput = document.createElement('textarea');
     notesInput.className = 'trk-notes-input';
@@ -1098,6 +1112,7 @@ function buildTrackerRows() {
     tr.appendChild(uitTd);
     tr.appendChild(priTd);
     tr.appendChild(statusTd);
+    tr.appendChild(uitCompTd);
     tr.appendChild(notesTd);
     tb.appendChild(tr);
   });
