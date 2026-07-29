@@ -1027,9 +1027,15 @@ document.addEventListener('mousemove', function(e){
 });
 
 
-const TRACKER_STATUS = {};
-const TRACKER_NOTES = {};
-window.TRACKER_UIT_COMP = {};
+const TRACKER_STATUS = JSON.parse(localStorage.getItem('cs_tracker_status') || '{}');
+const TRACKER_NOTES = JSON.parse(localStorage.getItem('cs_tracker_notes') || '{}');
+window.TRACKER_UIT_COMP = JSON.parse(localStorage.getItem('cs_tracker_uitcomp') || '{}');
+
+function saveTrackerState() {
+  localStorage.setItem('cs_tracker_status', JSON.stringify(TRACKER_STATUS));
+  localStorage.setItem('cs_tracker_notes', JSON.stringify(TRACKER_NOTES));
+  localStorage.setItem('cs_tracker_uitcomp', JSON.stringify(window.TRACKER_UIT_COMP));
+}
 
 function statusBadgeSelect(name, current) {
   const opts = [
@@ -1048,6 +1054,7 @@ function statusBadgeSelect(name, current) {
   sel.addEventListener('change', function() {
     TRACKER_STATUS[name] = this.value;
     this.className = 'status-select s-' + this.value;
+    saveTrackerState();
     updateTrackerSummary();
     filterTracker();
   });
@@ -1092,6 +1099,7 @@ function buildTrackerRows() {
     uitCompInput.addEventListener('input', function() {
       if(!window.TRACKER_UIT_COMP) window.TRACKER_UIT_COMP = {};
       window.TRACKER_UIT_COMP[name] = this.value;
+      saveTrackerState();
     });
     uitCompTd.appendChild(uitCompInput);
 
@@ -1104,6 +1112,7 @@ function buildTrackerRows() {
     notesInput.addEventListener('input', function() {
       TRACKER_NOTES[name] = this.value;
       this.rows = Math.max(1, this.value.split('\n').length);
+      saveTrackerState();
     });
     notesTd.appendChild(notesInput);
 
