@@ -287,10 +287,10 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
 
   <div class="card">
     <div class="tabs">
-      <button class="tab active" onclick="switchTab('gap')"><i class="ti ti-table" aria-hidden="true" style="margin-right:5px"></i>Gap analysis</button>
+      <button class="tab active" onclick="switchTab('audits')"><i class="ti ti-world" aria-hidden="true" style="margin-right:5px"></i>Domain audits</button>
       <button class="tab" onclick="switchTab('library')"><i class="ti ti-components" aria-hidden="true" style="margin-right:5px"></i>Component library</button>
+      <button class="tab" onclick="switchTab('gap')"><i class="ti ti-table" aria-hidden="true" style="margin-right:5px"></i>Gap analysis</button>
       <button class="tab" onclick="switchTab('tracker')"><i class="ti ti-checkbox" aria-hidden="true" style="margin-right:5px"></i>Phase 3 tracker</button>
-      <button class="tab" onclick="switchTab('audits')"><i class="ti ti-world" aria-hidden="true" style="margin-right:5px"></i>Domain audits</button>
     </div>
 
     <div id="panel-gap" class="panel active">
@@ -1170,6 +1170,7 @@ function switchTab(id){
   document.querySelector(`[onclick="switchTab('${id}')"]`).classList.add("active");
   document.getElementById("panel-"+id).classList.add("active");
 }
+switchTab('audits');
 </script>
 </body>
 </html>
