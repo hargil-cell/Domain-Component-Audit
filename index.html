@@ -63,10 +63,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .phase-section{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1.5rem}
 .section-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem}
 .phases{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
-.phase{border-radius:var(--radius-md);padding:12px 10px;text-align:center;border:0.5px solid var(--border);background:var(--bg2);position:relative}
+.phase{border-radius:var(--radius-md);border:0.5px solid var(--border);background:var(--bg2);position:relative;cursor:pointer;transition:border-color .15s}
+.phase:hover{border-color:var(--border2)}
 .phase.done{background:var(--green-bg);border-color:var(--green-border)}
 .phase.active{background:var(--blue-bg);border-color:var(--blue-border)}
-.phase-connector{position:absolute;top:50%;right:-5px;width:10px;height:1px;background:var(--border2);z-index:1}
+.phase-header{padding:12px 10px;text-align:center}
+.phase-connector{position:absolute;top:24px;right:-5px;width:10px;height:1px;background:var(--border2);z-index:1}
 .phase-num{font-size:10px;font-weight:500;color:var(--text3);margin-bottom:4px}
 .phase.done .phase-num{color:var(--green-text)}
 .phase.active .phase-num{color:var(--blue-text)}
@@ -77,6 +79,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .phase.done .phase-wk{color:var(--green-text)}
 .phase.active .phase-wk{color:var(--blue-text)}
 .phase-check{font-size:12px;margin-top:4px;color:var(--green-text)}
+.phase-chevron{font-size:11px;margin-top:5px;color:var(--text3);transition:transform .2s;display:block}
+.phase.done .phase-chevron{color:var(--green-text)}
+.phase.active .phase-chevron{color:var(--blue-text)}
+.phase.expanded .phase-chevron{transform:rotate(180deg)}
+.phase-deliverables{display:none;border-top:0.5px solid var(--border);padding:10px 10px 12px;text-align:left}
+.phase.done .phase-deliverables{border-color:var(--green-border)}
+.phase.active .phase-deliverables{border-color:var(--blue-border)}
+.phase.expanded .phase-deliverables{display:block}
+.phase-deliverables-label{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;opacity:.6}
+.phase.done .phase-deliverables-label{color:var(--green-text)}
+.phase.active .phase-deliverables-label{color:var(--blue-text)}
+.phase-deliverables-label{color:var(--text3)}
+.phase-deliverable{display:flex;align-items:flex-start;gap:5px;font-size:10px;line-height:1.4;margin-bottom:4px}
+.phase.done .phase-deliverable{color:var(--green-text)}
+.phase.active .phase-deliverable{color:var(--blue-text)}
+.phase-deliverable{color:var(--text2)}
+.phase-deliverable i{flex-shrink:0;margin-top:1px;font-size:10px}
 
 .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1.5rem}
 .tabs{display:flex;gap:0;border-bottom:0.5px solid var(--border);background:var(--bg2)}
@@ -250,37 +269,115 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
   <div class="phase-section">
     <div class="section-label">Project phases — 14 weeks</div>
     <div class="phases">
-      <div class="phase done">
-        <div class="phase-num">Phase 1</div>
-        <div class="phase-name">Discovery &amp; audit</div>
-        <div class="phase-wk">Week 1</div>
-        <div class="phase-check"><i class="ti ti-check" aria-hidden="true"></i></div>
+      <div class="phase done" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-num">Phase 1</div>
+          <div class="phase-name">Discovery &amp; audit</div>
+          <div class="phase-wk">Week 1</div>
+          <div class="phase-check"><i class="ti ti-check" aria-hidden="true"></i></div>
+          <i class="ti ti-chevron-down phase-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="phase-deliverables">
+          <div class="phase-deliverables-label">Delivered</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>3 domain audits (clicksend.com, blog, try)</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>78 components identified</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>UIT gap analysis (37 / 31 / 4)</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Interactive dashboard (GitHub Pages)</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Component mapping doc</div>
+        </div>
       </div>
-      <div class="phase done">
-        <div class="phase-num">Phase 2</div>
-        <div class="phase-name">Token foundation</div>
-        <div class="phase-wk">Week 2</div>
-        <div class="phase-check"><i class="ti ti-check" aria-hidden="true"></i></div>
+      <div class="phase done" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-num">Phase 2</div>
+          <div class="phase-name">Token foundation</div>
+          <div class="phase-wk">Week 2</div>
+          <div class="phase-check"><i class="ti ti-check" aria-hidden="true"></i></div>
+          <i class="ti ti-chevron-down phase-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="phase-deliverables">
+          <div class="phase-deliverables-label">Delivered</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Token Studio JSON generated</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Brand primitives swapped (16 stops)</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Neutral primitives swapped (16 stops)</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Amber/Yellow primitives swapped</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Light &amp; dark mode semantics rewired</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Typography variables confirmed</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Variable backups exported</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Type scale added to brand guidelines</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Token swap checklist completed</div>
+        </div>
       </div>
-      <div class="phase active">
-        <div class="phase-num">Phase 3</div>
-        <div class="phase-name">Core components</div>
-        <div class="phase-wk">Weeks 3–8</div>
+      <div class="phase active" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-num">Phase 3</div>
+          <div class="phase-name">Core components</div>
+          <div class="phase-wk">Weeks 3–8</div>
+          <i class="ti ti-chevron-down phase-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="phase-deliverables">
+          <div class="phase-deliverables-label">In progress</div>
+          <div class="phase-deliverable"><i class="ti ti-check"></i>Atom components verified &amp; signed off</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Molecule components adapted</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Organism components adapted</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>4 scratch-build components</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Component doc library started</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>All 78 components signed off</div>
+        </div>
       </div>
-      <div class="phase">
-        <div class="phase-num">Phase 4</div>
-        <div class="phase-name">Full page designs</div>
-        <div class="phase-wk">Weeks 9–12</div>
+      <div class="phase" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-num">Phase 4</div>
+          <div class="phase-name">Full page designs</div>
+          <div class="phase-wk">Weeks 9–12</div>
+          <i class="ti ti-chevron-down phase-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="phase-deliverables">
+          <div class="phase-deliverables-label">Planned</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Homepage full page design</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Product landing pages (SMS, MMS, Rich)</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Sub-product / use-case pages</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Pricing page</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Solutions &amp; industries overview</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Industry detail template</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Blog home &amp; article templates</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Landing page templates (try.*)</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Light &amp; dark mode variants</div>
+        </div>
       </div>
-      <div class="phase">
-        <div class="phase-num">Phase 5</div>
-        <div class="phase-name">Asset production</div>
-        <div class="phase-wk">Week 13</div>
+      <div class="phase" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-num">Phase 5</div>
+          <div class="phase-name">Asset production</div>
+          <div class="phase-wk">Week 13</div>
+          <i class="ti ti-chevron-down phase-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="phase-deliverables">
+          <div class="phase-deliverables-label">Planned</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Illustration library (AI-generated, brand style)</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Icon set (Streamline Plump Solid)</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Photography art direction brief</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Handset &amp; messaging imagery set</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Application / UI screenshot library</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Clicky mascot states (empty, error, success)</div>
+        </div>
       </div>
-      <div class="phase">
-        <div class="phase-num">Phase 6</div>
-        <div class="phase-name">Dev handoff</div>
-        <div class="phase-wk">Week 14</div>
+      <div class="phase" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-num">Phase 6</div>
+          <div class="phase-name">Dev handoff</div>
+          <div class="phase-wk">Week 14</div>
+          <i class="ti ti-chevron-down phase-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="phase-deliverables">
+          <div class="phase-deliverables-label">Planned</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Component doc library (all 78 components)</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Storybook + Storyblok integration scoped</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Figma dev mode annotations</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Token export for dev (CSS variables)</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Responsive breakpoint specs</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Accessibility audit &amp; sign-off</div>
+          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Final handoff package</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1471,6 +1568,10 @@ function filterTracker() {
 }
 
 buildTrackerRows();
+
+function togglePhase(el) {
+  el.classList.toggle('expanded');
+}
 
 function switchTab(id){
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
