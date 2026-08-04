@@ -96,6 +96,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .phase.active .phase-deliverable{color:var(--blue-text)}
 .phase-deliverable{color:var(--text2)}
 .phase-deliverable i{flex-shrink:0;margin-top:1px;font-size:10px}
+.phase-deliverable{cursor:pointer;border-radius:4px;padding:2px 4px;margin-left:-4px;transition:background .1s}
+.phase-deliverable:hover{background:rgba(0,0,0,.05)}
+.phase.done .phase-deliverable:hover{background:rgba(0,0,0,.06)}
+.phase-deliverable.checked i{color:var(--green-text)}
+.phase.done .phase-deliverable.checked i,.phase.done .phase-deliverable i{color:var(--green-text)}
+.phase.active .phase-deliverable.checked i{color:var(--blue-text)}
+.phase-deliverable.checked{opacity:1}
+.phase-deliverable:not(.checked){opacity:.65}
 
 .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1.5rem}
 .tabs{display:flex;gap:0;border-bottom:0.5px solid var(--border);background:var(--bg2)}
@@ -279,11 +287,11 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
         </div>
         <div class="phase-deliverables">
           <div class="phase-deliverables-label">Delivered</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>3 domain audits (clicksend.com, blog, try)</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>78 components identified</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>UIT gap analysis (37 / 31 / 4)</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Interactive dashboard (GitHub Pages)</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Component mapping doc</div>
+          <div class="phase-deliverable checked" data-id="p1-1" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>3 domain audits (clicksend.com, blog, try)</div>
+          <div class="phase-deliverable checked" data-id="p1-2" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>78 components identified</div>
+          <div class="phase-deliverable checked" data-id="p1-3" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>UIT gap analysis (37 / 31 / 4)</div>
+          <div class="phase-deliverable checked" data-id="p1-4" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Interactive dashboard (GitHub Pages)</div>
+          <div class="phase-deliverable checked" data-id="p1-5" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Component mapping doc</div>
         </div>
       </div>
       <div class="phase done" onclick="togglePhase(this)">
@@ -296,15 +304,15 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
         </div>
         <div class="phase-deliverables">
           <div class="phase-deliverables-label">Delivered</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Token Studio JSON generated</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Brand primitives swapped (16 stops)</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Neutral primitives swapped (16 stops)</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Amber/Yellow primitives swapped</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Light &amp; dark mode semantics rewired</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Typography variables confirmed</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Variable backups exported</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Type scale added to brand guidelines</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Token swap checklist completed</div>
+          <div class="phase-deliverable checked" data-id="p2-1" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Token Studio JSON generated</div>
+          <div class="phase-deliverable checked" data-id="p2-2" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Brand primitives swapped (16 stops)</div>
+          <div class="phase-deliverable checked" data-id="p2-3" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Neutral primitives swapped (16 stops)</div>
+          <div class="phase-deliverable checked" data-id="p2-4" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Amber/Yellow primitives swapped</div>
+          <div class="phase-deliverable checked" data-id="p2-5" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Light &amp; dark mode semantics rewired</div>
+          <div class="phase-deliverable checked" data-id="p2-6" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Typography variables confirmed</div>
+          <div class="phase-deliverable checked" data-id="p2-7" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Variable backups exported</div>
+          <div class="phase-deliverable checked" data-id="p2-8" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Type scale added to brand guidelines</div>
+          <div class="phase-deliverable checked" data-id="p2-9" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Token swap checklist completed</div>
         </div>
       </div>
       <div class="phase active" onclick="togglePhase(this)">
@@ -316,12 +324,12 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
         </div>
         <div class="phase-deliverables">
           <div class="phase-deliverables-label">In progress</div>
-          <div class="phase-deliverable"><i class="ti ti-check"></i>Atom components verified &amp; signed off</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Molecule components adapted</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Organism components adapted</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>4 scratch-build components</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Component doc library started</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>All 78 components signed off</div>
+          <div class="phase-deliverable checked" data-id="p3-1" onclick="toggleDeliverable(event,this)"><i class="ti ti-check"></i>Atom components verified &amp; signed off</div>
+          <div class="phase-deliverable" data-id="p3-2" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Molecule components adapted</div>
+          <div class="phase-deliverable" data-id="p3-3" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Organism components adapted</div>
+          <div class="phase-deliverable" data-id="p3-4" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>4 scratch-build components</div>
+          <div class="phase-deliverable" data-id="p3-5" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Component doc library started</div>
+          <div class="phase-deliverable" data-id="p3-6" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>All 78 components signed off</div>
         </div>
       </div>
       <div class="phase" onclick="togglePhase(this)">
@@ -333,15 +341,15 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
         </div>
         <div class="phase-deliverables">
           <div class="phase-deliverables-label">Planned</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Homepage full page design</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Product landing pages (SMS, MMS, Rich)</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Sub-product / use-case pages</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Pricing page</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Solutions &amp; industries overview</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Industry detail template</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Blog home &amp; article templates</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Landing page templates (try.*)</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Light &amp; dark mode variants</div>
+          <div class="phase-deliverable" data-id="p4-1" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Homepage full page design</div>
+          <div class="phase-deliverable" data-id="p4-2" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Product landing pages (SMS, MMS, Rich)</div>
+          <div class="phase-deliverable" data-id="p4-3" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Sub-product / use-case pages</div>
+          <div class="phase-deliverable" data-id="p4-4" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Pricing page</div>
+          <div class="phase-deliverable" data-id="p4-5" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Solutions &amp; industries overview</div>
+          <div class="phase-deliverable" data-id="p4-6" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Industry detail template</div>
+          <div class="phase-deliverable" data-id="p4-7" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Blog home &amp; article templates</div>
+          <div class="phase-deliverable" data-id="p4-8" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Landing page templates (try.*)</div>
+          <div class="phase-deliverable" data-id="p4-9" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Light &amp; dark mode variants</div>
         </div>
       </div>
       <div class="phase" onclick="togglePhase(this)">
@@ -353,12 +361,12 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
         </div>
         <div class="phase-deliverables">
           <div class="phase-deliverables-label">Planned</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Illustration library (AI-generated, brand style)</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Icon set (Streamline Plump Solid)</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Photography art direction brief</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Handset &amp; messaging imagery set</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Application / UI screenshot library</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Clicky mascot states (empty, error, success)</div>
+          <div class="phase-deliverable" data-id="p5-1" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Illustration library (AI-generated, brand style)</div>
+          <div class="phase-deliverable" data-id="p5-2" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Icon set (Streamline Plump Solid)</div>
+          <div class="phase-deliverable" data-id="p5-3" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Photography art direction brief</div>
+          <div class="phase-deliverable" data-id="p5-4" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Handset &amp; messaging imagery set</div>
+          <div class="phase-deliverable" data-id="p5-5" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Application / UI screenshot library</div>
+          <div class="phase-deliverable" data-id="p5-6" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Clicky mascot states (empty, error, success)</div>
         </div>
       </div>
       <div class="phase" onclick="togglePhase(this)">
@@ -370,13 +378,13 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
         </div>
         <div class="phase-deliverables">
           <div class="phase-deliverables-label">Planned</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Component doc library (all 78 components)</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Storybook + Storyblok integration scoped</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Figma dev mode annotations</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Token export for dev (CSS variables)</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Responsive breakpoint specs</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Accessibility audit &amp; sign-off</div>
-          <div class="phase-deliverable"><i class="ti ti-circle-dashed"></i>Final handoff package</div>
+          <div class="phase-deliverable" data-id="p6-1" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Component doc library (all 78 components)</div>
+          <div class="phase-deliverable" data-id="p6-2" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Storybook + Storyblok integration scoped</div>
+          <div class="phase-deliverable" data-id="p6-3" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Figma dev mode annotations</div>
+          <div class="phase-deliverable" data-id="p6-4" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Token export for dev (CSS variables)</div>
+          <div class="phase-deliverable" data-id="p6-5" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Responsive breakpoint specs</div>
+          <div class="phase-deliverable" data-id="p6-6" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Accessibility audit &amp; sign-off</div>
+          <div class="phase-deliverable" data-id="p6-7" onclick="toggleDeliverable(event,this)"><i class="ti ti-circle-dashed"></i>Final handoff package</div>
         </div>
       </div>
     </div>
@@ -1568,6 +1576,32 @@ function filterTracker() {
 }
 
 buildTrackerRows();
+
+const DELIVERABLE_STATE = JSON.parse(localStorage.getItem('cs_deliverables') || '{}');
+
+function toggleDeliverable(e, el) {
+  e.stopPropagation();
+  const id = el.dataset.id;
+  const isChecked = el.classList.toggle('checked');
+  const icon = el.querySelector('i');
+  icon.className = isChecked ? 'ti ti-check' : 'ti ti-circle-dashed';
+  DELIVERABLE_STATE[id] = isChecked;
+  localStorage.setItem('cs_deliverables', JSON.stringify(DELIVERABLE_STATE));
+}
+
+function restoreDeliverables() {
+  document.querySelectorAll('.phase-deliverable[data-id]').forEach(el => {
+    const id = el.dataset.id;
+    if(DELIVERABLE_STATE[id] === true) {
+      el.classList.add('checked');
+      el.querySelector('i').className = 'ti ti-check';
+    } else if(DELIVERABLE_STATE[id] === false) {
+      el.classList.remove('checked');
+      el.querySelector('i').className = 'ti ti-circle-dashed';
+    }
+  });
+}
+restoreDeliverables();
 
 function togglePhase(el) {
   el.classList.toggle('expanded');
