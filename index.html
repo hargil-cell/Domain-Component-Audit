@@ -169,9 +169,8 @@ tbody tr:last-child td{border-bottom:none}
 .audit-stat-val{font-size:12px;font-weight:500;color:var(--text)}
 .info-icon{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bg3);color:var(--text3);font-size:9px;cursor:default;position:relative;flex-shrink:0;border:0.5px solid var(--border2)}
 .info-icon:hover{background:var(--border2);color:var(--text)}
-.info-icon .tooltip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);font-size:11px;line-height:1.5;padding:8px 10px;border-radius:var(--radius-md);width:230px;z-index:100;pointer-events:none;font-weight:400;text-align:left}
-.info-icon .tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--text)}
-.info-icon:hover .tooltip{display:block}
+#tooltip-global{display:none;position:fixed;background:var(--text);color:var(--bg);font-size:11px;line-height:1.5;padding:8px 10px;border-radius:var(--radius-md);width:230px;z-index:9999;pointer-events:none;font-weight:400;text-align:left}
+#tooltip-global::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--text)}
 .coverage-bar{height:5px;border-radius:3px;background:var(--bg3);margin:10px 0 5px;overflow:hidden}
 .coverage-fill{height:100%;border-radius:3px}
 .coverage-fill.full{background:var(--green-border)}
@@ -623,11 +622,11 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
             <div class="audit-card-title"><i class="ti ti-world" aria-hidden="true" style="color:#378ADD"></i>clicksend.com</div>
             <span class="domain-tag">Main site</span>
           </div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Page templates<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">The number of distinct page layouts found. Each unique template needs its own full page design in Phase 4.</span></span></span><span class="audit-stat-val">8</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Card types<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">The different card layouts found — product cards, capability cards, benefit cards, pricing tier cards etc. These repeat heavily across pages.</span></span></span><span class="audit-stat-val">7</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Hero types<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">The different hero/header section layouts found. Each maps to a variant of UIT's Header sections component.</span></span></span><span class="audit-stat-val">5</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Conversion goal<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">The primary action every page is driving toward. Useful for deciding CTA hierarchy during Phase 4 full page designs.</span></span></span><span class="audit-stat-val">Free trial signup</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">JS render gap<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">Components injected by JavaScript after page load — modals, dropdowns, dynamic carousels. These couldn't be captured by the scraper so the real component count may be slightly higher than 78.</span></span></span><span class="audit-stat-val" style="color:var(--green-text)">None — body complete</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Page templates<span class="info-icon" data-tip="The number of distinct page layouts found. Each unique template needs its own full page design in Phase 4."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">8</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Card types<span class="info-icon" data-tip="The different card layouts found — product cards, capability cards, benefit cards, pricing tier cards etc. These repeat heavily across pages."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">7</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Hero types<span class="info-icon" data-tip="The different hero/header section layouts found. Each maps to a variant of UIT's Header sections component."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">5</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Conversion goal<span class="info-icon" data-tip="The primary action every page is driving toward. Useful for deciding CTA hierarchy during Phase 4 full page designs."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">Free trial signup</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">JS render gap<span class="info-icon" data-tip="Components injected by JavaScript after page load — modals, dropdowns, dynamic carousels. These couldn't be captured by the scraper so the real component count may be slightly higher than 78."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val" style="color:var(--green-text)">None — body complete</span></div>
           <div class="coverage-bar"><div class="coverage-fill full" style="width:100%"></div></div>
           <div class="coverage-note">Full server-render — complete capture</div>
         </div>
@@ -636,11 +635,11 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
             <div class="audit-card-title"><i class="ti ti-news" aria-hidden="true" style="color:#7F77DD"></i>blog.clicksend.com</div>
             <span class="domain-tag">Blog</span>
           </div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Page templates<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">The number of distinct page layouts found. Each unique template needs its own full page design in Phase 4.</span></span></span><span class="audit-stat-val">5</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Card types<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">The different card layouts found. Blog cards are deliberately minimal — virtually all variants show only image + title. Author, date, and excerpt live on the post hero, not the cards.</span></span></span><span class="audit-stat-val">7</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Hero types<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">The different hero/header section layouts — featured carousel, post hero, and listing header. Each maps to a variant of UIT's Header sections component.</span></span></span><span class="audit-stat-val">3</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Card metadata<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">The most consistent pattern on the blog — cards show image + title only. Author, date, category, read time appear only on the post hero, not on any card variant.</span></span></span><span class="audit-stat-val">Image + title only</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">JS render gap<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">The article body is JavaScript-rendered and couldn't be captured. In-body elements like code blocks, H2/H3 headings, inline CTAs, and tables of contents are unverified. A headless browser (Playwright) would be needed for full capture.</span></span></span><span class="audit-stat-val" style="color:var(--amber-text)">Body unverified</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Page templates<span class="info-icon" data-tip="The number of distinct page layouts found. Each unique template needs its own full page design in Phase 4."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">5</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Card types<span class="info-icon" data-tip="The different card layouts found. Blog cards are deliberately minimal — virtually all variants show only image + title. Author, date, and excerpt live on the post hero, not the cards."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">7</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Hero types<span class="info-icon" data-tip="The different hero/header section layouts — featured carousel, post hero, and listing header. Each maps to a variant of UIT's Header sections component."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">3</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Card metadata<span class="info-icon" data-tip="The most consistent pattern on the blog — cards show image + title only. Author, date, category, read time appear only on the post hero, not on any card variant."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">Image + title only</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">JS render gap<span class="info-icon" data-tip="The article body is JavaScript-rendered and couldn't be captured. In-body elements like code blocks, H2/H3 headings, inline CTAs, and tables of contents are unverified. A headless browser (Playwright) would be needed for full capture."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val" style="color:var(--amber-text)">Body unverified</span></div>
           <div class="coverage-bar"><div class="coverage-fill partial-cov" style="width:70%"></div></div>
           <div class="coverage-note">JS-rendered body — Playwright needed for full capture</div>
         </div>
@@ -649,11 +648,11 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
             <div class="audit-card-title"><i class="ti ti-speakerphone" aria-hidden="true" style="color:#1D9E75"></i>try.clicksend.com</div>
             <span class="domain-tag">Campaign</span>
           </div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Live templates<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">try.* is a campaign/redirect subdomain — most paths redirect to the main site. Only the gated eGuide is a genuine standalone landing page. The demo funnel has migrated to clicksend.com/demo/.</span></span></span><span class="audit-stat-val">1 (+ 1 redirect)</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Nav style<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">Landing pages deliberately strip the global nav down to logo + Login/Sign Up only — removing navigation escape routes to keep visitors focused on the single conversion goal.</span></span></span><span class="audit-stat-val">Stripped — logo + CTA only</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Form<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">Both forms are deliberately short — 1-field email capture for the eGuide (optimised for volume) and a 2-input qualification form for the demo (optimised for quality). No embedded scheduler detected.</span></span></span><span class="audit-stat-val">1-field email capture</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">Funnel status<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">The book-a-demo flow has moved from try.* to clicksend.com/demo/ and now wears full site chrome — suggesting try.* is being wound down toward main-domain pages.</span></span></span><span class="audit-stat-val">Demo migrated to main</span></div>
-          <div class="audit-stat-row"><span class="audit-stat-label">JS render gap<span class="info-icon"><i class="ti ti-info-small"></i><span class="tooltip">Components injected by JavaScript after page load. None detected on try.* — full capture achieved.</span></span></span><span class="audit-stat-val" style="color:var(--green-text)">None — complete</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Live templates<span class="info-icon" data-tip="try.* is a campaign/redirect subdomain — most paths redirect to the main site. Only the gated eGuide is a genuine standalone landing page. The demo funnel has migrated to clicksend.com/demo/."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">1 (+ 1 redirect)</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Nav style<span class="info-icon" data-tip="Landing pages deliberately strip the global nav down to logo + Login/Sign Up only — removing navigation escape routes to keep visitors focused on the single conversion goal."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">Stripped — logo + CTA only</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Form<span class="info-icon" data-tip="Both forms are deliberately short — 1-field email capture for the eGuide (optimised for volume) and a 2-input qualification form for the demo (optimised for quality). No embedded scheduler detected."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">1-field email capture</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">Funnel status<span class="info-icon" data-tip="The book-a-demo flow has moved from try.* to clicksend.com/demo/ and now wears full site chrome — suggesting try.* is being wound down toward main-domain pages."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val">Demo migrated to main</span></div>
+          <div class="audit-stat-row"><span class="audit-stat-label">JS render gap<span class="info-icon" data-tip="Components injected by JavaScript after page load. None detected on try.* — full capture achieved."><i class="ti ti-info-small"></i></span></span><span class="audit-stat-val" style="color:var(--green-text)">None — complete</span></div>
           <div class="coverage-bar"><div class="coverage-fill full" style="width:100%"></div></div>
           <div class="coverage-note">Thin subdomain — campaign and redirect only</div>
         </div>
@@ -703,6 +702,7 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
 
   <footer>ClickSend design system · Phase 2 complete · Built with Claude · 2026</footer>
 </div>
+<div id="tooltip-global"></div>
 
 <script>
 
@@ -1607,6 +1607,29 @@ function restoreDeliverables() {
   });
 }
 restoreDeliverables();
+
+// ─── GLOBAL TOOLTIP ───────────────────────────────────────────────────────
+const _tt = document.getElementById('tooltip-global');
+document.querySelectorAll('.info-icon').forEach(el => {
+  const text = el.dataset.tip;
+  el.addEventListener('mouseenter', e => {
+    _tt.textContent = text;
+    _tt.style.display = 'block';
+    positionTooltip(e);
+  });
+  el.addEventListener('mousemove', positionTooltip);
+  el.addEventListener('mouseleave', () => { _tt.style.display = 'none'; });
+});
+function positionTooltip(e) {
+  const tw = 230, pad = 8;
+  let x = e.clientX - tw / 2;
+  let y = e.clientY - _tt.offsetHeight - 14;
+  x = Math.max(pad, Math.min(x, window.innerWidth - tw - pad));
+  if(y < pad) y = e.clientY + 20;
+  _tt.style.left = x + 'px';
+  _tt.style.top = y + 'px';
+}
+
 
 function togglePhase(el) {
   el.classList.toggle('expanded');
