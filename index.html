@@ -1737,16 +1737,12 @@ async function syncToGitHub() {
 }
 
 async function loadFromGitHub() {
-  const {pat, path} = getGHSettings();
-  if(!pat) { setSyncStatus('No token — open Settings first', 'red'); return; }
+  const {path} = getGHSettings();
   setSyncStatus('Loading…');
   try {
-    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`, {
-      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
-    });
+    const r = await fetch(`https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${path}?t=${Date.now()}`);
     if(!r.ok) { setSyncStatus('Nothing saved yet — sync first', 'red'); return; }
-    const d = await r.json();
-    const state = JSON.parse(decodeURIComponent(escape(atob(d.content))));
+    const state = await r.json();
     applyState(state);
     setSyncStatus('✓ Loaded from GitHub', 'green');
     setTimeout(() => setSyncStatus(''), 4000);
@@ -1755,19 +1751,14 @@ async function loadFromGitHub() {
   }
 }
 
-// auto-load from GitHub on page open if PAT is set
+// auto-load from GitHub on page open — public read, no PAT needed
 (async () => {
-  const {pat} = getGHSettings();
-  if(!pat) return;
+  const {path} = getGHSettings();
   setSyncStatus('Loading…');
   try {
-    const {path} = getGHSettings();
-    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`, {
-      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
-    });
+    const r = await fetch(`https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${path}?t=${Date.now()}`);
     if(!r.ok) { setSyncStatus(''); return; }
-    const d = await r.json();
-    const state = JSON.parse(decodeURIComponent(escape(atob(d.content))));
+    const state = await r.json();
     applyState(state);
     setSyncStatus('✓ Loaded from GitHub', 'green');
     setTimeout(() => setSyncStatus(''), 4000);
