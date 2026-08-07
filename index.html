@@ -247,6 +247,32 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
     </div>
     <div class="top-bar-meta">
       <span class="status-pill"><span class="status-dot"></span>Phase 2 complete</span>
+      <span id="sync-status" style="font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px"></span>
+      <button id="sync-btn" onclick="syncToGitHub()" style="font-size:11px;padding:5px 10px;border-radius:20px;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:5px"><i class="ti ti-cloud-upload"></i> Sync</button>
+      <button onclick="toggleSettings()" style="font-size:11px;padding:5px 10px;border-radius:20px;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:5px"><i class="ti ti-settings"></i> Settings</button>
+    </div>
+  </div>
+
+  <!-- Settings panel -->
+  <div id="settings-panel" style="display:none;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <span style="font-weight:500;font-size:13px">GitHub sync settings</span>
+      <button onclick="toggleSettings()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px"><i class="ti ti-x"></i></button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+      <div>
+        <label style="font-size:11px;color:var(--text3);display:block;margin-bottom:4px">GitHub Personal Access Token</label>
+        <input id="gh-pat" type="password" placeholder="ghp_xxxxxxxxxxxx" style="width:100%;font-size:12px;padding:7px 10px;border-radius:var(--radius-md);border:0.5px solid var(--border2);background:var(--bg3);color:var(--text);font-family:monospace">
+      </div>
+      <div>
+        <label style="font-size:11px;color:var(--text3);display:block;margin-bottom:4px">State file path in repo</label>
+        <input id="gh-path" type="text" value="state.json" style="width:100%;font-size:12px;padding:7px 10px;border-radius:var(--radius-md);border:0.5px solid var(--border2);background:var(--bg3);color:var(--text);font-family:monospace">
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button onclick="saveSettings()" style="font-size:12px;padding:6px 14px;border-radius:20px;background:#2977FF;color:#fff;border:none;cursor:pointer">Save settings</button>
+      <button onclick="loadFromGitHub()" style="font-size:12px;padding:6px 14px;border-radius:20px;border:0.5px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer">Pull latest from GitHub</button>
+      <span style="font-size:11px;color:var(--text3)">Token is stored locally in your browser only — never committed to the repo.</span>
     </div>
   </div>
 
@@ -1607,7 +1633,148 @@ function restoreDeliverables() {
 }
 restoreDeliverables();
 
-// ─── GLOBAL TOOLTIP ───────────────────────────────────────────────────────
+// ─── GITHUB SYNC ─────────────────────────────────────────────────────────
+const GH_OWNER = 'hargil-cell';
+const GH_REPO  = 'Domain-Component-Audit';
+const GH_BRANCH = 'main';
+
+function getGHSettings() {
+  return {
+    pat:  localStorage.getItem('cs_gh_pat') || '',
+    path: localStorage.getItem('cs_gh_path') || 'state.json'
+  };
+}
+
+function saveSettings() {
+  const pat  = document.getElementById('gh-pat').value.trim();
+  const path = document.getElementById('gh-path').value.trim() || 'state.json';
+  if(pat) localStorage.setItem('cs_gh_pat', pat);
+  localStorage.setItem('cs_gh_path', path);
+  setSyncStatus('Settings saved', 'green');
+  setTimeout(() => setSyncStatus(''), 3000);
+}
+
+function toggleSettings() {
+  const p = document.getElementById('settings-panel');
+  const {pat, path} = getGHSettings();
+  if(p.style.display === 'none') {
+    p.style.display = 'block';
+    document.getElementById('gh-pat').value = pat;
+    document.getElementById('gh-path').value = path;
+  } else {
+    p.style.display = 'none';
+  }
+}
+
+function setSyncStatus(msg, color) {
+  const el = document.getElementById('sync-status');
+  el.textContent = msg;
+  el.style.color = color === 'green' ? 'var(--green-text)' : color === 'red' ? '#e53e3e' : 'var(--text3)';
+}
+
+function gatherState() {
+  return {
+    tracker_status:  TRACKER_STATUS,
+    tracker_notes:   TRACKER_NOTES,
+    tracker_uitcomp: window.TRACKER_UIT_COMP || {},
+    deliverables:    DELIVERABLE_STATE,
+    mapping_notes:   MAPPING_NOTES,
+    saved_at:        new Date().toISOString()
+  };
+}
+
+function applyState(state) {
+  if(!state) return;
+  if(state.tracker_status)  Object.assign(TRACKER_STATUS, state.tracker_status);
+  if(state.tracker_notes)   Object.assign(TRACKER_NOTES, state.tracker_notes);
+  if(state.tracker_uitcomp) Object.assign(window.TRACKER_UIT_COMP, state.tracker_uitcomp);
+  if(state.deliverables)    Object.assign(DELIVERABLE_STATE, state.deliverables);
+  if(state.mapping_notes)   Object.assign(MAPPING_NOTES, state.mapping_notes);
+  // persist to localStorage
+  saveTrackerState();
+  localStorage.setItem('cs_deliverables', JSON.stringify(DELIVERABLE_STATE));
+  localStorage.setItem('cs_mapping_notes', JSON.stringify(MAPPING_NOTES));
+  // re-render
+  document.getElementById('trk-body').innerHTML = '';
+  buildTrackerRows();
+  restoreDeliverables();
+  buildMapping();
+  updateTrackerSummary();
+}
+
+async function syncToGitHub() {
+  const {pat, path} = getGHSettings();
+  if(!pat) { setSyncStatus('No token — open Settings first', 'red'); return; }
+  setSyncStatus('Syncing…');
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(gatherState(), null, 2))));
+  // get current SHA if file exists
+  let sha = '';
+  try {
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`, {
+      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if(r.ok) { const d = await r.json(); sha = d.sha; }
+  } catch(e) {}
+  // commit
+  try {
+    const body = { message: 'Dashboard state sync', content, branch: GH_BRANCH };
+    if(sha) body.sha = sha;
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if(r.ok) {
+      setSyncStatus('✓ Synced ' + new Date().toLocaleTimeString(), 'green');
+      localStorage.setItem('cs_last_sync', new Date().toISOString());
+    } else {
+      const err = await r.json();
+      setSyncStatus('Sync failed: ' + (err.message || r.status), 'red');
+    }
+  } catch(e) {
+    setSyncStatus('Sync error: ' + e.message, 'red');
+  }
+}
+
+async function loadFromGitHub() {
+  const {pat, path} = getGHSettings();
+  if(!pat) { setSyncStatus('No token — open Settings first', 'red'); return; }
+  setSyncStatus('Loading…');
+  try {
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`, {
+      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if(!r.ok) { setSyncStatus('Nothing saved yet — sync first', 'red'); return; }
+    const d = await r.json();
+    const state = JSON.parse(decodeURIComponent(escape(atob(d.content))));
+    applyState(state);
+    setSyncStatus('✓ Loaded from GitHub', 'green');
+    setTimeout(() => setSyncStatus(''), 4000);
+  } catch(e) {
+    setSyncStatus('Load error: ' + e.message, 'red');
+  }
+}
+
+// auto-load from GitHub on page open if PAT is set
+(async () => {
+  const {pat} = getGHSettings();
+  if(!pat) return;
+  setSyncStatus('Loading…');
+  try {
+    const {path} = getGHSettings();
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`, {
+      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if(!r.ok) { setSyncStatus(''); return; }
+    const d = await r.json();
+    const state = JSON.parse(decodeURIComponent(escape(atob(d.content))));
+    applyState(state);
+    setSyncStatus('✓ Loaded from GitHub', 'green');
+    setTimeout(() => setSyncStatus(''), 4000);
+  } catch(e) { setSyncStatus(''); }
+})();
+
+
 const _tt = document.getElementById('tooltip-global');
 document.querySelectorAll('.info-icon').forEach(el => {
   const text = el.dataset.tip;
