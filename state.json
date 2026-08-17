@@ -31,11 +31,11 @@
     "Benefit Card": "ready",
     "Solution Card": "ready",
     "Industry Card": "ready",
-    "Pricing Tier Card": "notstarted",
-    "SMS Template Card": "notstarted",
-    "Blog Post Card (minimal)": "notstarted",
-    "Blog Featured Card": "notstarted",
-    "Blog Related Posts Card": "notstarted",
+    "Pricing Tier Card": "ready",
+    "SMS Template Card": "ready",
+    "Blog Post Card (minimal)": "ready",
+    "Blog Featured Card": "ready",
+    "Blog Related Posts Card": "ready",
     "Value-Prop Bullet List": "notstarted",
     "Benefit Trio Block": "notstarted",
     "Mega-Menu Dropdown": "notstarted",
@@ -187,7 +187,14 @@
     "Breadcrumb": "Breadcrumbs/Breadcrumb",
     "Benefit Card": "Features sections/_Feature text/Featured icon card",
     "Solution Card": "Features sections/_Feature text/Featured icon card",
-    "Industry Card": "Features sections/_Feature text/Industries icon box"
+    "Industry Card": "Features sections/_Feature text/Industries icon box",
+    "Pricing Tier Card": "Pricing sections/Pricing page header/ClickSend Pricing header",
+    "SMS Template Card": "SMS templates/SMS template card",
+    "Blog Post Card (minimal)": "Blog sections/Blog post card/Simple 01",
+    "Blog Featured Card": "Blog sections/Blog page header/Featured post 01",
+    "Blog Related Posts Card": "Blog sections/Blog section/Simple left aligned 01",
+    "Benefit Trio Block": "Features section/Simple icons 2",
+    "Mega-Menu Dropdown": "Header navigation/Dropdown header navigation"
   },
   "deliverables": {
     "p3-2": false,
@@ -195,5 +202,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-07T07:02:00.908Z"
+  "saved_at": "2026-08-17T08:42:27.066Z"
 }
