@@ -77,7 +77,7 @@
     "Benefit / Icon Block Row": "notstarted",
     "End-of-Page CTA Banner": "notstarted",
     "Mid-Page Trial Banner": "notstarted",
-    "Mid-Page Social-Proof Banner": "ready"
+    "Mid-Page Social-Proof Banner": "notstarted"
   },
   "tracker_notes": {
     "Primary CTA Button": "",
@@ -212,5 +212,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-21T08:12:29.713Z"
+  "saved_at": "2026-08-21T08:13:46.166Z"
 }
