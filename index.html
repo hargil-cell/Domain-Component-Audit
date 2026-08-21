@@ -1639,11 +1639,14 @@ restoreDeliverables();
 
 // ─── AUTO SYNC ────────────────────────────────────────────────────────────
 let _syncTimer = null;
+let _syncInProgress = false;
 function scheduleSync() {
   if(_syncTimer) clearTimeout(_syncTimer);
-  _syncTimer = setTimeout(() => {
+  _syncTimer = setTimeout(async () => {
     const {pat} = getGHSettings();
-    if(pat) syncToGitHub();
+    if(!pat || _syncInProgress) return;
+    _syncInProgress = true;
+    try { await syncToGitHub(); } finally { _syncInProgress = false; }
   }, 3000);
 }
 const GH_OWNER = 'hargil-cell';
