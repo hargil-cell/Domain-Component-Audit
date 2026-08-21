@@ -1718,22 +1718,29 @@ async function syncToGitHub() {
   const {pat, path} = getGHSettings();
   if(!pat) { setSyncStatus('No token — open Settings first', 'red'); return; }
   setSyncStatus('Syncing…');
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(gatherState(), null, 2))));
+  const fileContent = btoa(unescape(encodeURIComponent(JSON.stringify(gatherState(), null, 2))));
 
-  // fetch fresh SHA before writing
+  // fetch fresh SHA with cache busting
   let sha = null;
   try {
-    const shaRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
-      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json', 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
+    const shaRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?_=${Date.now()}`, {
+      cache: 'no-store',
+      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
     });
     if(shaRes.ok) {
       const shaData = await shaRes.json();
-      sha = shaData.sha || null;
+      sha = shaData.sha;
+      console.log('Got SHA:', sha);
+    } else {
+      console.log('SHA fetch status:', shaRes.status, '— treating as new file');
     }
-  } catch(e) {}
+  } catch(e) {
+    console.error('SHA fetch error:', e);
+  }
 
-  const body = { message: 'Dashboard state sync', content, branch: GH_BRANCH };
+  const body = { message: 'Dashboard state sync', content: fileContent, branch: GH_BRANCH };
   if(sha) body.sha = sha;
+  console.log('Writing with sha:', sha);
 
   try {
     const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
