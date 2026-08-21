@@ -1719,15 +1719,15 @@ async function syncToGitHub() {
   if(!pat) { setSyncStatus('No token — open Settings first', 'red'); return; }
   setSyncStatus('Syncing…');
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(gatherState(), null, 2))));
-  // get current SHA if file exists
+  // always fetch fresh SHA immediately before writing
   let sha = '';
   try {
-    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`, {
-      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}&t=${Date.now()}`, {
+      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json', 'Cache-Control': 'no-cache' }
     });
     if(r.ok) { const d = await r.json(); sha = d.sha; }
   } catch(e) {}
-  // commit
+  // commit with fresh SHA
   try {
     const body = { message: 'Dashboard state sync', content, branch: GH_BRANCH };
     if(sha) body.sha = sha;
