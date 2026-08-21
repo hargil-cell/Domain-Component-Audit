@@ -619,26 +619,6 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
       </div>
     </div>
 
-    <div id="panel-mapping" class="panel">
-      <div class="filters" style="margin-bottom:1rem">
-        <div class="search-wrap">
-          <i class="ti ti-search" aria-hidden="true"></i>
-          <input type="text" id="map-search" placeholder="Search pages or components…" oninput="filterMapping()">
-        </div>
-        <div class="filter-group">
-          <label>Domain</label>
-          <select id="map-domain" onchange="filterMapping()">
-            <option value="">All domains</option>
-            <option value="clicksend.com">clicksend.com</option>
-            <option value="blog.clicksend.com">blog.clicksend.com</option>
-            <option value="try.clicksend.com">try.clicksend.com</option>
-          </select>
-        </div>
-        <span class="filter-count" id="map-count"></span>
-      </div>
-      <div id="map-body"></div>
-    </div>
-
     <div id="panel-audits" class="panel">
       <div class="audit-grid">
         <div class="audit-card">
@@ -1765,31 +1745,67 @@ async function syncToGitHub() {
 }
 
 async function loadFromGitHub() {
-  const {path} = getGHSettings();
+  const {path, pat} = getGHSettings();
   setSyncStatus('Loading…');
   try {
-    const r = await fetch(`https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${path}?t=${Date.now()}`);
-    if(!r.ok) { setSyncStatus('Nothing saved yet — sync first', 'red'); return; }
-    const state = await r.json();
-    applyState(state);
-    setSyncStatus('✓ Loaded from GitHub', 'green');
-    setTimeout(() => setSyncStatus(''), 4000);
+    let state = null;
+    if(pat) {
+      const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?_=${Date.now()}`, {
+        cache: 'no-store',
+        headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
+      });
+      if(r.ok) {
+        const d = await r.json();
+        state = JSON.parse(decodeURIComponent(escape(atob(d.content))));
+      }
+    } else {
+      const r = await fetch(`https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${path}?_=${Date.now()}`, {
+        cache: 'no-store'
+      });
+      if(r.ok) state = await r.json();
+    }
+    if(state) {
+      applyState(state);
+      setSyncStatus('✓ Loaded from GitHub', 'green');
+      setTimeout(() => setSyncStatus(''), 4000);
+    } else {
+      setSyncStatus('Nothing saved yet — sync first', 'red');
+    }
   } catch(e) {
     setSyncStatus('Load error: ' + e.message, 'red');
   }
 }
 
-// auto-load from GitHub on page open — public read, no PAT needed
+// auto-load from GitHub on page open
 (async () => {
-  const {path} = getGHSettings();
+  const {path, pat} = getGHSettings();
   setSyncStatus('Loading…');
   try {
-    const r = await fetch(`https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${path}?t=${Date.now()}`);
-    if(!r.ok) { setSyncStatus(''); return; }
-    const state = await r.json();
-    applyState(state);
-    setSyncStatus('✓ Loaded from GitHub', 'green');
-    setTimeout(() => setSyncStatus(''), 4000);
+    // use authenticated API if PAT available (bypasses CDN cache), else fall back to raw
+    let state = null;
+    if(pat) {
+      const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?_=${Date.now()}`, {
+        cache: 'no-store',
+        headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json' }
+      });
+      if(r.ok) {
+        const d = await r.json();
+        state = JSON.parse(decodeURIComponent(escape(atob(d.content))));
+      }
+    } else {
+      // no PAT — use raw URL with aggressive cache busting
+      const r = await fetch(`https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${path}?_=${Date.now()}`, {
+        cache: 'no-store'
+      });
+      if(r.ok) state = await r.json();
+    }
+    if(state) {
+      applyState(state);
+      setSyncStatus('✓ Loaded from GitHub', 'green');
+      setTimeout(() => setSyncStatus(''), 4000);
+    } else {
+      setSyncStatus('');
+    }
   } catch(e) { setSyncStatus(''); }
 })();
 
