@@ -52,9 +52,9 @@
     "Single-Field Lead Capture": "notstarted",
     "Multi-Input Qualification": "notstarted",
     "Form Success Modal": "notstarted",
-    "Inline Form Validation": "notstarted",
-    "Pricing Calculator": "notstarted",
-    "Global Header (full)": "notstarted",
+    "Inline Form Validation": "ready",
+    "Pricing Calculator": "ready",
+    "Global Header (full)": "ready",
     "Stripped Landing Header": "notstarted",
     "Global Footer": "notstarted",
     "Minimal Footer": "notstarted",
@@ -212,5 +212,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-21T08:04:37.421Z"
+  "saved_at": "2026-08-21T08:05:50.836Z"
 }
