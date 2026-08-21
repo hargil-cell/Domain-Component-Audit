@@ -939,6 +939,7 @@ function saveMappingNote(el, url, component) {
   const key = url + '||' + component;
   MAPPING_NOTES[key] = el.value;
   localStorage.setItem('cs_mapping_notes', JSON.stringify(MAPPING_NOTES));
+  scheduleSync();
 }
 
 function buildMapping() {
@@ -1497,6 +1498,7 @@ function statusBadgeSelect(name, current) {
     TRACKER_STATUS[name] = this.value;
     this.className = 'status-select s-' + this.value;
     saveTrackerState();
+    scheduleSync();
     updateTrackerSummary();
     filterTracker();
   });
@@ -1542,6 +1544,7 @@ function buildTrackerRows() {
       if(!window.TRACKER_UIT_COMP) window.TRACKER_UIT_COMP = {};
       window.TRACKER_UIT_COMP[name] = this.value;
       saveTrackerState();
+      scheduleSync();
     });
     uitCompTd.appendChild(uitCompInput);
 
@@ -1555,6 +1558,7 @@ function buildTrackerRows() {
       TRACKER_NOTES[name] = this.value;
       this.rows = Math.max(1, this.value.split('\n').length);
       saveTrackerState();
+      scheduleSync();
     });
     notesTd.appendChild(notesInput);
 
@@ -1616,6 +1620,7 @@ function toggleDeliverable(e, el) {
   icon.className = isChecked ? 'ti ti-check' : 'ti ti-circle-dashed';
   DELIVERABLE_STATE[id] = isChecked;
   localStorage.setItem('cs_deliverables', JSON.stringify(DELIVERABLE_STATE));
+  scheduleSync();
 }
 
 function restoreDeliverables() {
@@ -1632,7 +1637,15 @@ function restoreDeliverables() {
 }
 restoreDeliverables();
 
-// ─── GITHUB SYNC ─────────────────────────────────────────────────────────
+// ─── AUTO SYNC ────────────────────────────────────────────────────────────
+let _syncTimer = null;
+function scheduleSync() {
+  if(_syncTimer) clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(() => {
+    const {pat} = getGHSettings();
+    if(pat) syncToGitHub();
+  }, 3000);
+}
 const GH_OWNER = 'hargil-cell';
 const GH_REPO  = 'Domain-Component-Audit';
 const GH_BRANCH = 'main';
