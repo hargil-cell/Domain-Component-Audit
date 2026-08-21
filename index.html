@@ -1719,21 +1719,26 @@ async function syncToGitHub() {
   if(!pat) { setSyncStatus('No token — open Settings first', 'red'); return; }
   setSyncStatus('Syncing…');
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(gatherState(), null, 2))));
-  // always fetch fresh SHA immediately before writing
-  let sha = '';
+
+  // fetch fresh SHA before writing
+  let sha = null;
   try {
-    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}&t=${Date.now()}`, {
-      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json', 'Cache-Control': 'no-cache' }
+    const shaRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
+      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json', 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
     });
-    if(r.ok) { const d = await r.json(); sha = d.sha; }
+    if(shaRes.ok) {
+      const shaData = await shaRes.json();
+      sha = shaData.sha || null;
+    }
   } catch(e) {}
-  // commit with fresh SHA
+
+  const body = { message: 'Dashboard state sync', content, branch: GH_BRANCH };
+  if(sha) body.sha = sha;
+
   try {
-    const body = { message: 'Dashboard state sync', content, branch: GH_BRANCH };
-    if(sha) body.sha = sha;
     const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
       method: 'PUT',
-      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      headers: { Authorization: `token ${pat}`, Accept: 'application/vnd.github.v3+json`, 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
     if(r.ok) {
@@ -1742,6 +1747,7 @@ async function syncToGitHub() {
     } else {
       const err = await r.json();
       setSyncStatus('Sync failed: ' + (err.message || r.status), 'red');
+      console.error('Sync detail:', err);
     }
   } catch(e) {
     setSyncStatus('Sync error: ' + e.message, 'red');
