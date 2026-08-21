@@ -37,17 +37,17 @@
     "Blog Featured Card": "ready",
     "Blog Related Posts Card": "ready",
     "Value-Prop Bullet List": "notstarted",
-    "Benefit Trio Block": "notstarted",
-    "Mega-Menu Dropdown": "notstarted",
+    "Benefit Trio Block": "ready",
+    "Mega-Menu Dropdown": "ready",
     "Breadcrumb": "ready",
     "Product Tab Bar": "notstarted",
-    "Code Language Tab Bar": "notstarted",
-    "Language / Region Selector": "notstarted",
-    "Numbered Pagination": "notstarted",
-    "Carousel Indicator": "notstarted",
-    "Customer Logo Strip": "notstarted",
-    "Review / Award Badge": "notstarted",
-    "Trustpilot / G2 / Capterra": "notstarted",
+    "Code Language Tab Bar": "ready",
+    "Language / Region Selector": "ready",
+    "Numbered Pagination": "ready",
+    "Carousel Indicator": "ready",
+    "Customer Logo Strip": "ready",
+    "Review / Award Badge": "ready",
+    "Trustpilot / G2 / Capterra": "ready",
     "Stat Callout": "notstarted",
     "Single-Field Lead Capture": "notstarted",
     "Multi-Input Qualification": "notstarted",
@@ -194,7 +194,17 @@
     "Blog Featured Card": "Blog sections/Blog page header/Featured post 01",
     "Blog Related Posts Card": "Blog sections/Blog section/Simple left aligned 01",
     "Benefit Trio Block": "Features section/Simple icons 2",
-    "Mega-Menu Dropdown": "Header navigation/Dropdown header navigation"
+    "Mega-Menu Dropdown": "Header navigation/Dropdown header navigation",
+    "Code Language Tab Bar": "Code snippets/Vertical with tabs",
+    "Language / Region Selector": "Dropdowns/Dropdown menu/Icon + chevron",
+    "Numbered Pagination": "Pagination/Type=Page Default/Shape=Square",
+    "Carousel Indicator": "Blog sections/Carousel layout 01",
+    "Customer Logo Strip": "Social proof sections/Full width",
+    "Review / Award Badge": "Social proof sections/SMS Comparison",
+    "Trustpilot / G2 / Capterra": "CTA section/Review logos 01",
+    "Pricing Calculator": "Sliders/Pricing slider",
+    "Inline Form Validation": "Inputs/Input field/Destructive=True",
+    "Global Header (full)": "Header navigation/Dropdown header navigation"
   },
   "deliverables": {
     "p3-2": false,
@@ -202,5 +212,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-17T08:42:27.066Z"
+  "saved_at": "2026-08-21T08:04:37.421Z"
 }
