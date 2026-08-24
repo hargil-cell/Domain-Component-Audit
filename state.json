@@ -48,7 +48,7 @@
     "Customer Logo Strip": "ready",
     "Review / Award Badge": "ready",
     "Trustpilot / G2 / Capterra": "ready",
-    "Stat Callout": "notstarted",
+    "Stat Callout": "ready",
     "Single-Field Lead Capture": "notstarted",
     "Multi-Input Qualification": "notstarted",
     "Form Success Modal": "notstarted",
@@ -213,5 +213,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-24T08:30:54.990Z"
+  "saved_at": "2026-08-24T08:31:26.741Z"
 }
