@@ -208,9 +208,9 @@
   },
   "deliverables": {
     "p3-2": false,
-    "p3-1": false,
+    "p3-1": true,
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-21T12:48:42.340Z"
+  "saved_at": "2026-08-24T08:26:29.103Z"
 }
