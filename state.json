@@ -204,7 +204,8 @@
     "Trustpilot / G2 / Capterra": "CTA section/Review logos 01",
     "Pricing Calculator": "Sliders/Pricing slider",
     "Inline Form Validation": "Inputs/Input field/Destructive=True",
-    "Global Header (full)": "Header navigation/Dropdown header navigation"
+    "Global Header (full)": "Header navigation/Dropdown header navigation",
+    "Stat Callout": "Metrics section/"
   },
   "deliverables": {
     "p3-2": false,
@@ -212,5 +213,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-24T08:26:29.103Z"
+  "saved_at": "2026-08-24T08:30:48.345Z"
 }
