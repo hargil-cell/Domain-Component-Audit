@@ -56,7 +56,7 @@
     "Pricing Calculator": "ready",
     "Global Header (full)": "ready",
     "Stripped Landing Header": "ready",
-    "Global Footer": "notstarted",
+    "Global Footer": "ready",
     "Minimal Footer": "notstarted",
     "Split Marketing Hero": "notstarted",
     "Product Hero": "notstarted",
@@ -215,5 +215,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:21:51.985Z"
+  "saved_at": "2026-08-25T08:22:41.971Z"
 }
