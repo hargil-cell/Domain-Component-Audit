@@ -57,7 +57,7 @@
     "Global Header (full)": "ready",
     "Stripped Landing Header": "ready",
     "Global Footer": "ready",
-    "Minimal Footer": "notstarted",
+    "Minimal Footer": "ready",
     "Split Marketing Hero": "notstarted",
     "Product Hero": "notstarted",
     "Directory Hero": "notstarted",
@@ -216,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:30:18.428Z"
+  "saved_at": "2026-08-25T08:59:16.748Z"
 }
