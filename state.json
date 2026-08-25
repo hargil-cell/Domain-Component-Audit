@@ -99,7 +99,7 @@
     "Publish Date": "",
     "Microcopy / Trust Note": "",
     "Promo / Offer Bar": "",
-    "Deprecation Notice": "",
+    "Deprecation Notice": "Just a H1 within pricing module ",
     "SVG Icon System": "",
     "Benefit Checkmark": "",
     "Social Icons (footer)": "",
@@ -213,5 +213,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-24T08:31:26.741Z"
+  "saved_at": "2026-08-25T07:48:37.747Z"
 }
