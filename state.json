@@ -206,7 +206,8 @@
     "Inline Form Validation": "Inputs/Input field/Destructive=True",
     "Global Header (full)": "Header navigation/Dropdown header navigation",
     "Stat Callout": "Metrics section/Card grey light",
-    "Stripped Landing Header": "Header navigation/Dropdown header navigation"
+    "Stripped Landing Header": "Header navigation/Dropdown header navigation",
+    "Global Footer": "Footers/Large 02"
   },
   "deliverables": {
     "p3-2": false,
@@ -214,5 +215,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:21:07.955Z"
+  "saved_at": "2026-08-25T08:21:51.985Z"
 }
