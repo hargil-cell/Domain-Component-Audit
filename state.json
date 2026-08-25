@@ -147,7 +147,7 @@
     "Demo Hero": "",
     "Featured Post Carousel": "Blog home hero",
     "Post Hero": "Blog post hero",
-    "Listing Header": "",
+    "Listing Header": "Blog categorisation + search",
     "Alternating Image/Text Row": "",
     "How-It-Works Steps": "",
     "FAQ Accordion": "",
@@ -216,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:29:41.629Z"
+  "saved_at": "2026-08-25T08:30:03.629Z"
 }
