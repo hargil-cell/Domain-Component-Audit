@@ -209,7 +209,8 @@
     "Stripped Landing Header": "Header navigation/Dropdown header navigation",
     "Global Footer": "Footers/Large 02",
     "Minimal Footer": "Footers/Small 03",
-    "End-of-Page CTA Banner": "CTA sections/Card horizontal"
+    "End-of-Page CTA Banner": "CTA sections/Card horizontal",
+    "Benefit / Icon Block Row": "Features section/"
   },
   "deliverables": {
     "p3-2": false,
@@ -217,5 +218,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T12:26:15.410Z"
+  "saved_at": "2026-08-25T12:26:43.196Z"
 }
