@@ -212,7 +212,8 @@
     "End-of-Page CTA Banner": "CTA sections/Card horizontal",
     "Benefit / Icon Block Row": "Features section/Icon cards 01",
     "Card Grid (Industries)": "Features section/Industries icons 01",
-    "Card Grid (Solutions)": "Features section/Industries icons 01"
+    "Card Grid (Solutions)": "Features section/Industries icons 01",
+    "FAQ Accordion": "FAQ section/Accordion "
   },
   "deliverables": {
     "p3-2": false,
@@ -220,5 +221,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T12:27:54.597Z"
+  "saved_at": "2026-08-25T12:28:26.783Z"
 }
