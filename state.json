@@ -137,7 +137,7 @@
     "Global Header (full)": "",
     "Stripped Landing Header": "",
     "Global Footer": "",
-    "Minimal Footer": "",
+    "Minimal Footer": "Landing Page Footer",
     "Split Marketing Hero": "",
     "Product Hero": "",
     "Directory Hero": "",
@@ -216,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:24:44.240Z"
+  "saved_at": "2026-08-25T08:24:52.806Z"
 }
