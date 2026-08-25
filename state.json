@@ -146,7 +146,7 @@
     "Lead-Magnet Hero": "LP template hero",
     "Demo Hero": "",
     "Featured Post Carousel": "Blog home hero",
-    "Post Hero": "",
+    "Post Hero": "Blog post hero",
     "Listing Header": "",
     "Alternating Image/Text Row": "",
     "How-It-Works Steps": "",
@@ -216,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:29:31.630Z"
+  "saved_at": "2026-08-25T08:29:41.629Z"
 }
