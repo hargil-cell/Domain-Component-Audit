@@ -157,7 +157,7 @@
     "Benefit / Icon Block Row": "",
     "End-of-Page CTA Banner": "",
     "Mid-Page Trial Banner": "",
-    "Mid-Page Social-Proof Banner": "Blog home CTA"
+    "Mid-Page Social-Proof Banner": "Blog home CTA (replace?)"
   },
   "tracker_uitcomp": {
     "Primary CTA Button": "Buttons/Button/Primary",
@@ -216,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T12:24:36.949Z"
+  "saved_at": "2026-08-25T12:24:43.598Z"
 }
