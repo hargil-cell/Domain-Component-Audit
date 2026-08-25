@@ -211,7 +211,7 @@
     "Minimal Footer": "Footers/Small 03",
     "End-of-Page CTA Banner": "CTA sections/Card horizontal",
     "Benefit / Icon Block Row": "Features section/Icon cards 01",
-    "Card Grid (Industries)": "Features section/"
+    "Card Grid (Industries)": "Features section/Industries icons 01"
   },
   "deliverables": {
     "p3-2": false,
@@ -219,5 +219,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T12:27:40.766Z"
+  "saved_at": "2026-08-25T12:27:50.246Z"
 }
