@@ -207,7 +207,8 @@
     "Global Header (full)": "Header navigation/Dropdown header navigation",
     "Stat Callout": "Metrics section/Card grey light",
     "Stripped Landing Header": "Header navigation/Dropdown header navigation",
-    "Global Footer": "Footers/Large 02"
+    "Global Footer": "Footers/Large 02",
+    "Minimal Footer": "Footers/Small 03"
   },
   "deliverables": {
     "p3-2": false,
@@ -215,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:22:41.971Z"
+  "saved_at": "2026-08-25T08:24:44.240Z"
 }
