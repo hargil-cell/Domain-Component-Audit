@@ -154,7 +154,7 @@
     "Card Grid (Solutions)": "",
     "Card Grid (Industries)": "",
     "Blog Content Rails": "",
-    "Benefit / Icon Block Row": "",
+    "Benefit / Icon Block Row": "2x2 feature cards",
     "End-of-Page CTA Banner": "",
     "Mid-Page Trial Banner": "",
     "Mid-Page Social-Proof Banner": "Blog home CTA (replace?)"
@@ -217,5 +217,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T12:25:46.581Z"
+  "saved_at": "2026-08-25T12:26:15.410Z"
 }
