@@ -19,7 +19,7 @@
     "Publish Date": "ready",
     "Microcopy / Trust Note": "ready",
     "Promo / Offer Bar": "ready",
-    "Deprecation Notice": "notstarted",
+    "Deprecation Notice": "ready",
     "SVG Icon System": "ready",
     "Benefit Checkmark": "ready",
     "Social Icons (footer)": "ready",
@@ -99,7 +99,7 @@
     "Publish Date": "",
     "Microcopy / Trust Note": "",
     "Promo / Offer Bar": "",
-    "Deprecation Notice": "Just a H1 within pricing module about ",
+    "Deprecation Notice": "Just a H1 within pricing module about product sunsets",
     "SVG Icon System": "",
     "Benefit Checkmark": "",
     "Social Icons (footer)": "",
@@ -213,5 +213,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T07:48:42.004Z"
+  "saved_at": "2026-08-25T07:48:51.812Z"
 }
