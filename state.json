@@ -145,7 +145,7 @@
     "Pricing Hero": "",
     "Lead-Magnet Hero": "LP template hero",
     "Demo Hero": "",
-    "Featured Post Carousel": "",
+    "Featured Post Carousel": "Blog home hero",
     "Post Hero": "",
     "Listing Header": "",
     "Alternating Image/Text Row": "",
@@ -216,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:28:54.629Z"
+  "saved_at": "2026-08-25T08:29:31.630Z"
 }
