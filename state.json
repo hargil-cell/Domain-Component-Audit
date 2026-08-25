@@ -116,7 +116,7 @@
     "Blog Post Card (minimal)": "",
     "Blog Featured Card": "",
     "Blog Related Posts Card": "",
-    "Value-Prop Bullet List": "",
+    "Value-Prop Bullet List": "Content or feature section?",
     "Benefit Trio Block": "",
     "Mega-Menu Dropdown": "",
     "Breadcrumb": "",
@@ -213,5 +213,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T07:48:51.812Z"
+  "saved_at": "2026-08-25T07:50:12.398Z"
 }
