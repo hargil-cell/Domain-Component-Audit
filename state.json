@@ -141,7 +141,7 @@
     "Split Marketing Hero": "Home page hero",
     "Product Hero": "SMS page + RCS page hero",
     "Directory Hero": "Solutions/Industries directory minimal hero",
-    "Detail Page Hero": "",
+    "Detail Page Hero": "Industry hero - replace with split marketing hero?",
     "Pricing Hero": "",
     "Lead-Magnet Hero": "",
     "Demo Hero": "",
@@ -216,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:28:09.137Z"
+  "saved_at": "2026-08-25T08:28:29.495Z"
 }
