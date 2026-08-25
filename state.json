@@ -140,7 +140,7 @@
     "Minimal Footer": "Landing Page Footer",
     "Split Marketing Hero": "Home page hero",
     "Product Hero": "SMS page + RCS page hero",
-    "Directory Hero": "Solutions/Industries minimal hero",
+    "Directory Hero": "Solutions/Industries directory minimal hero",
     "Detail Page Hero": "",
     "Pricing Hero": "",
     "Lead-Magnet Hero": "",
@@ -216,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:27:28.140Z"
+  "saved_at": "2026-08-25T08:28:09.137Z"
 }
