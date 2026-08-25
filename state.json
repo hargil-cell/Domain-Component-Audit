@@ -148,7 +148,7 @@
     "Featured Post Carousel": "Blog home hero",
     "Post Hero": "Blog post hero",
     "Listing Header": "Blog categorisation + search",
-    "Alternating Image/Text Row": "",
+    "Alternating Image/Text Row": "Alternating features section",
     "How-It-Works Steps": "",
     "FAQ Accordion": "",
     "Card Grid (Solutions)": "",
@@ -216,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:30:03.629Z"
+  "saved_at": "2026-08-25T08:30:18.428Z"
 }
