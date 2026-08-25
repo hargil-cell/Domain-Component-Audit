@@ -210,7 +210,7 @@
     "Global Footer": "Footers/Large 02",
     "Minimal Footer": "Footers/Small 03",
     "End-of-Page CTA Banner": "CTA sections/Card horizontal",
-    "Benefit / Icon Block Row": "Features section/"
+    "Benefit / Icon Block Row": "Features section/Icon cards 01"
   },
   "deliverables": {
     "p3-2": false,
@@ -218,5 +218,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T12:26:43.196Z"
+  "saved_at": "2026-08-25T12:26:50.598Z"
 }
