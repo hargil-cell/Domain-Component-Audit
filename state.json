@@ -215,7 +215,8 @@
     "Card Grid (Solutions)": "Features section/Industries icons 01",
     "FAQ Accordion": "FAQ section/Accordion 02",
     "How-It-Works Steps": "Features section/Simple icons 01",
-    "Alternating Image/Text Row": "Features section/Alternating layout 02"
+    "Alternating Image/Text Row": "Features section/Alternating layout 02",
+    "Pricing Hero": "Pricing section/ClickSend Pricing Header"
   },
   "deliverables": {
     "p3-2": false,
@@ -223,5 +224,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T12:29:53.730Z"
+  "saved_at": "2026-08-25T12:30:43.915Z"
 }
