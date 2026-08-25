@@ -138,7 +138,7 @@
     "Stripped Landing Header": "",
     "Global Footer": "",
     "Minimal Footer": "Landing Page Footer",
-    "Split Marketing Hero": "",
+    "Split Marketing Hero": "Home page hero",
     "Product Hero": "SMS page + RCS page hero",
     "Directory Hero": "Solutions/Industries minimal hero",
     "Detail Page Hero": "",
@@ -216,5 +216,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-08-25T08:27:22.903Z"
+  "saved_at": "2026-08-25T08:27:28.140Z"
 }
