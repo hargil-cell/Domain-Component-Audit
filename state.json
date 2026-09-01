@@ -74,7 +74,7 @@
     "Card Grid (Solutions)": "ready",
     "Card Grid (Industries)": "ready",
     "Blog Content Rails": "ready",
-    "Benefit / Icon Block Row": "notstarted",
+    "Benefit / Icon Block Row": "ready",
     "End-of-Page CTA Banner": "notstarted",
     "Mid-Page Trial Banner": "notstarted",
     "Mid-Page Social-Proof Banner": "notstarted"
@@ -228,5 +228,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-01T11:59:07.795Z"
+  "saved_at": "2026-09-01T11:59:40.351Z"
 }
