@@ -217,7 +217,8 @@
     "How-It-Works Steps": "Features section/Simple icons 01",
     "Alternating Image/Text Row": "Features section/Alternating layout 02",
     "Pricing Hero": "Pricing section/ClickSend Pricing Header",
-    "Featured Post Carousel": "Blog page header/Featured post 01"
+    "Featured Post Carousel": "Blog page header/Featured post 01",
+    "Post Hero": "Blog post page header/"
   },
   "deliverables": {
     "p3-2": false,
@@ -225,5 +226,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-01T11:55:22.736Z"
+  "saved_at": "2026-09-01T11:57:49.651Z"
 }
