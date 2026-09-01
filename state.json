@@ -73,7 +73,7 @@
     "FAQ Accordion": "ready",
     "Card Grid (Solutions)": "ready",
     "Card Grid (Industries)": "ready",
-    "Blog Content Rails": "notstarted",
+    "Blog Content Rails": "ready",
     "Benefit / Icon Block Row": "notstarted",
     "End-of-Page CTA Banner": "notstarted",
     "Mid-Page Trial Banner": "notstarted",
@@ -219,7 +219,8 @@
     "Pricing Hero": "Pricing section/ClickSend Pricing Header",
     "Featured Post Carousel": "Blog page header/Featured post 01",
     "Post Hero": "Blog post page header/Large image 01",
-    "Listing Header": "Blog page header/Featured post 01"
+    "Listing Header": "Blog page header/Featured post 01",
+    "Blog Content Rails": "Blog page header/Featured post 01"
   },
   "deliverables": {
     "p3-2": false,
@@ -227,5 +228,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-01T11:58:37.471Z"
+  "saved_at": "2026-09-01T11:59:07.795Z"
 }
