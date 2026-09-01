@@ -65,7 +65,7 @@
     "Pricing Hero": "notstarted",
     "Lead-Magnet Hero": "notstarted",
     "Demo Hero": "notstarted",
-    "Featured Post Carousel": "notstarted",
+    "Featured Post Carousel": "ready",
     "Post Hero": "notstarted",
     "Listing Header": "notstarted",
     "Alternating Image/Text Row": "ready",
@@ -225,5 +225,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-01T11:54:42.890Z"
+  "saved_at": "2026-09-01T11:55:22.736Z"
 }
