@@ -40,7 +40,7 @@
     "Benefit Trio Block": "ready",
     "Mega-Menu Dropdown": "ready",
     "Breadcrumb": "ready",
-    "Product Tab Bar": "notstarted",
+    "Product Tab Bar": "ready",
     "Code Language Tab Bar": "ready",
     "Language / Region Selector": "ready",
     "Numbered Pagination": "ready",
@@ -225,7 +225,8 @@
     "Detail Page Hero": "Header section/Card mockup 12",
     "Directory Hero": "Header section/Center, Buttons, Default",
     "Product Hero": "Header section/Card mockup 12",
-    "Split Marketing Hero": "Header section/Card mockup 12"
+    "Split Marketing Hero": "Header section/Card mockup 12",
+    "Product Tab Bar": "Tabs/Product"
   },
   "deliverables": {
     "p3-2": false,
@@ -233,5 +234,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-02T11:31:54.991Z"
+  "saved_at": "2026-09-02T13:07:09.501Z"
 }
