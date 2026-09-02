@@ -141,7 +141,7 @@
     "Split Marketing Hero": "Home page hero",
     "Product Hero": "SMS page + RCS page hero",
     "Directory Hero": "Solutions/Industries directory minimal hero",
-    "Detail Page Hero": "Industry hero - replace with split marketing hero?",
+    "Detail Page Hero": "+ ",
     "Pricing Hero": "",
     "Lead-Magnet Hero": "LP template hero",
     "Demo Hero": "",
@@ -222,7 +222,7 @@
     "Listing Header": "Blog page header/Featured post 01",
     "Blog Content Rails": "Blog page header/Featured post 01",
     "Lead-Magnet Hero": "Header sections/Email + name capture",
-    "Detail Page Hero": "Header section/Card mockup ",
+    "Detail Page Hero": "Header section/Card mockup 12",
     "Directory Hero": "Header section/Center, Buttons, Default"
   },
   "deliverables": {
@@ -231,5 +231,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-02T11:23:41.525Z"
+  "saved_at": "2026-09-02T11:23:49.488Z"
 }
