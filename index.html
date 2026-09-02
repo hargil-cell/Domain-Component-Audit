@@ -212,6 +212,30 @@ tbody tr:last-child td{border-bottom:none}
 .trk-notes-input{width:100%;font-size:11px;padding:4px 7px;border-radius:var(--radius-md);border:0.5px solid var(--border2);background:var(--bg2);color:var(--text);font-family:inherit;resize:none;line-height:1.4}
 .trk-notes-input:focus{outline:none;border-color:#378ADD}
 
+.str-card{border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:8px;overflow:hidden;background:var(--bg2)}
+.str-header{display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;user-select:none}
+.str-header:hover{background:var(--bg3)}
+.str-badge{font-size:10px;font-weight:500;padding:2px 7px;border-radius:20px;flex-shrink:0;white-space:nowrap}
+.str-b-marketing{background:var(--blue-bg);color:var(--blue-text)}
+.str-b-subproduct{background:var(--green-bg);color:var(--green-text)}
+.str-b-pricing{background:var(--amber-bg);color:var(--amber-text)}
+.str-b-overview{background:var(--bg3);color:var(--text2)}
+.str-b-solution{background:var(--green-bg);color:var(--green-text)}
+.str-b-industry{background:var(--amber-bg);color:var(--amber-text)}
+.str-b-landing{background:var(--bg3);color:var(--text2)}
+.str-page-name{font-size:12px;font-weight:500;color:var(--text);flex:1;min-width:0}
+.str-url{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:3px;flex-shrink:0;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.str-chevron{color:var(--text3);font-size:13px;transition:transform .2s;flex-shrink:0}
+.str-card.open .str-chevron{transform:rotate(180deg)}
+.str-body{display:none;border-top:0.5px solid var(--border)}
+.str-card.open .str-body{display:block}
+.str-row{display:flex;align-items:center;gap:8px;padding:6px 14px;border-bottom:0.5px solid var(--border);font-size:11px;color:var(--text2)}
+.str-row:last-child{border-bottom:none}
+.str-row i{font-size:12px;color:var(--text3);flex-shrink:0}
+.str-row.scratch{color:var(--amber-text)}
+.str-row.scratch i{color:var(--amber-text)}
+.str-build-tag{font-size:9px;padding:1px 5px;border-radius:4px;background:var(--amber-bg);color:var(--amber-text);margin-left:auto;flex-shrink:0}
+.str-note{font-size:10px;color:var(--text3);padding:6px 14px;border-top:0.5px solid var(--border);font-style:italic}
 
 .empty i{font-size:32px;display:block;margin-bottom:8px;opacity:.4}
 
@@ -425,6 +449,7 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
       <button class="tab" onclick="switchTab('library')"><i class="ti ti-components" aria-hidden="true" style="margin-right:5px"></i>Component library</button>
       <button class="tab" onclick="switchTab('gap')"><i class="ti ti-table" aria-hidden="true" style="margin-right:5px"></i>Gap analysis</button>
       <button class="tab" onclick="switchTab('tracker')"><i class="ti ti-checkbox" aria-hidden="true" style="margin-right:5px"></i>Phase 3 tracker</button>
+      <button class="tab" onclick="switchTab('structures')"><i class="ti ti-layout-rows" aria-hidden="true" style="margin-right:5px"></i>Page structures</button>
     </div>
 
     <div id="panel-gap" class="panel active">
@@ -617,6 +642,40 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
           No components match your filters
         </div>
       </div>
+    </div>
+
+    <div id="panel-structures" class="panel">
+      <div class="filters">
+        <div class="search-wrap">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" id="str-search" placeholder="Search pages or components…" oninput="filterStructures()">
+        </div>
+        <div class="filter-group">
+          <label>Domain</label>
+          <select id="str-domain" onchange="filterStructures()">
+            <option value="">All domains</option>
+            <option value="clicksend.com">clicksend.com</option>
+            <option value="blog.clicksend.com">blog.clicksend.com</option>
+            <option value="try.clicksend.com">try.clicksend.com</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Type</label>
+          <select id="str-type" onchange="filterStructures()">
+            <option value="">All types</option>
+            <option value="marketing">Marketing</option>
+            <option value="subproduct">Sub-product</option>
+            <option value="pricing">Pricing</option>
+            <option value="overview">Overview</option>
+            <option value="solution">Solution detail</option>
+            <option value="industry">Industry detail</option>
+            <option value="blog">Blog</option>
+            <option value="landing">Landing page</option>
+          </select>
+        </div>
+        <span class="filter-count" id="str-count"></span>
+      </div>
+      <div id="str-list"></div>
     </div>
 
     <div id="panel-audits" class="panel">
@@ -1834,6 +1893,109 @@ function positionTooltip(e) {
   _tt.style.left = x + 'px';
   _tt.style.top = y + 'px';
 }
+
+
+// ─── PAGE STRUCTURES ─────────────────────────────────────────────────────
+const SC = (icon,label,scratch)=>({icon,label,scratch:!!scratch});
+const SS_SHELL = SC('ti-layout-navbar','Header navigations');
+const SS_FOOTER = SC('ti-layout-bottombar','Footers');
+const SS_CTA = SC('ti-speakerphone','CTA sections — Card horizontal');
+const SS_ALT1 = SC('ti-layout-sidebar','Features sections — Alternating layout 01');
+const SS_ALT2 = SC('ti-layout-sidebar','Features sections — Alternating layout 02');
+const SS_ALT3 = SC('ti-layout-sidebar','Features sections — Alternating layout 03');
+const SS_ALT4 = SC('ti-layout-sidebar','Features sections — Alternating layout 04');
+const SS_ICONS1 = SC('ti-circles','Features sections — Simple icons 01');
+const SS_ICONS2 = SC('ti-circles','Features sections — Simple icons 02');
+const SS_ICARDS = SC('ti-layout-grid','Features sections — Icon cards 01');
+const SS_ILIST = SC('ti-list','Features sections — Icon list');
+const SS_STEPS = SC('ti-list-numbers','Progress steps — 3-step');
+const SS_FAQ = SC('ti-help-circle','FAQ sections');
+const SS_LOGO = SC('ti-building-store','Social proof sections — Customer logo strip');
+const SS_TP = SC('ti-star','Social proof sections — Trustpilot, G2, Capterra');
+const SS_TMPL = SC('ti-message','SMS Template cards',true);
+const SS_BADGE = SC('ti-award','Header sections — Award badge',true);
+const SS_CODE = SC('ti-code','Code snippets — Vertical tabs');
+const SS_PLUG = SC('ti-plug','Features sections — Integration logos');
+const SS_REVIEWS = SC('ti-message-circle','Social proof sections — Review quotes');
+
+const STR_PAGES = [
+  {name:'Homepage',url:'clicksend.com/gb/',type:'marketing',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_LOGO,SS_ICARDS,SS_ALT1,SS_CODE,SC('ti-plug','Social proof sections — Integration partner logos'),SS_ICONS2,SC('ti-chart-bar','Metrics sections'),SS_CTA,SS_TP,SS_FOOTER]},
+  {name:'SMS product landing',url:'clicksend.com/gb/sms/',type:'marketing',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ICARDS,SS_ALT2,SS_ICONS2,SS_LOGO,SS_FAQ,SS_CTA,SS_FOOTER]},
+  {name:'Bulk SMS',url:'clicksend.com/gb/sms/bulk-sms/',type:'subproduct',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_LOGO,SS_ALT1,SS_ALT2,SS_STEPS,SS_ICARDS,SS_ICONS2,SS_REVIEWS,SS_FAQ,SS_CTA,SS_TP,SS_FOOTER]},
+  {name:'SMS Marketing',url:'clicksend.com/gb/sms/sms-marketing/',type:'subproduct',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_STEPS,SS_ALT2,SS_ILIST,SS_ICONS2,SS_ICARDS,SS_TMPL,SS_FAQ,SS_CTA,SS_TP,SS_FOOTER]},
+  {name:'SMS API',url:'clicksend.com/gb/sms/sms-gateway-api/',type:'subproduct',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_CODE,SS_ICONS2,SS_ALT2,SS_ICONS1,SS_CTA,SS_FOOTER]},
+  {name:'Rich Messaging',url:'clicksend.com/gb/rich-messaging/',type:'marketing',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero + channel icons'),SS_ICARDS,SS_ALT1,SC('ti-mail','Newsletter CTA sections — Early access form'),SS_FOOTER]},
+  {name:'Pricing',url:'clicksend.com/gb/pricing/',type:'pricing',components:[SS_SHELL,SC('ti-bell','Banners — Promo bar'),SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SC('ti-layout-columns','Horizontal tabs — SMS / MMS / Voice / Email / Fax / Post'),SC('ti-currency-pound','Pricing sections — Pricing cards (4 tiers)'),SC('ti-adjustments','Sliders — Volume estimator'),SS_ICONS2,SC('ti-table','Pricing sections — Comparison table'),SC('ti-alert-triangle','Alerts — Deprecation notices'),SS_CTA,SS_FOOTER]},
+  {name:'Solutions overview',url:'clicksend.com/gb/solutions/',type:'overview',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SS_ICARDS,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Alerts & Notifications',url:'clicksend.com/gb/solutions/alerts-and-notifications/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ILIST,SS_ALT2,SS_ICONS2,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Customer Support',url:'clicksend.com/gb/solutions/customer-support/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_PLUG,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Marketing & Lead Management',url:'clicksend.com/gb/solutions/marketing-and-lead-management/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ICONS2,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Ordering & Delivery',url:'clicksend.com/gb/solutions/ordering-and-delivery/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Reminders',url:'clicksend.com/gb/solutions/reminders/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_STEPS,SS_ALT2,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Solution — 2 Factor Authentication',url:'clicksend.com/gb/solutions/2-factor-authentication-otp/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SC('ti-table','Features sections — Comparison table (SMS OTP vs alternatives)'),SS_ICONS2,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Sales Automation',url:'clicksend.com/gb/solutions/sales-automation/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Event Management',url:'clicksend.com/gb/solutions/event-management/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_REVIEWS,SS_CTA,SS_FOOTER]},
+  {name:'Solution — People Management',url:'clicksend.com/gb/solutions/people-management/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Business Continuity',url:'clicksend.com/gb/solutions/business-continuity-sms/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ICONS2,SS_CTA,SS_TP,SS_FOOTER]},
+  {name:'Industries overview',url:'clicksend.com/gb/industries/',type:'overview',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SS_BADGE,SS_ICARDS,SS_CTA,SS_FOOTER],note:'~24 industry cards. Award badge is build from scratch.'},
+  {name:'Industry — Retail',url:'clicksend.com/gb/industries/retail/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_ALT3,SS_ALT4,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Banking & Finance',url:'clicksend.com/gb/industries/banking-and-finance/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — eCommerce',url:'clicksend.com/gb/industries/ecommerce/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Call Centres',url:'clicksend.com/gb/industries/call-centres/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Transport & Logistics',url:'clicksend.com/gb/industries/transport-and-logistics/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Manufacturing',url:'clicksend.com/gb/industries/manufacturing/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Not-for-Profit',url:'clicksend.com/gb/industries/not-for-profit/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_REVIEWS,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Marketing Agencies',url:'clicksend.com/gb/industries/marketing/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ICONS2,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Blog home',url:'blog.clicksend.com/',type:'blog',domain:'blog.clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Featured post carousel hero'),SC('ti-layout-grid','Blog sections — Popular posts (2-up)'),SC('ti-filter','Filters — Category dropdown'),SC('ti-layout-grid','Blog sections — Latest posts grid (4-up)'),SC('ti-carousel','Blog sections — Dev Tips carousel'),SC('ti-layout-grid','Blog sections — Case study grid'),SC('ti-speakerphone','CTA sections — Mid-page trial banner'),SC('ti-building-store','Social proof sections — Social proof banner'),SC('ti-layout-rows','Pagination — Numbered pagination'),SS_FOOTER]},
+  {name:'Standard article',url:'blog.clicksend.com/{slug}/',type:'blog',domain:'blog.clicksend.com',note:'Article body is JS-rendered — in-body elements (code blocks, headings, inline CTAs) are unverified.',components:[SS_SHELL,SC('ti-layout-columns','Blog post sections — Post hero (full-width image)'),SC('ti-tag','Badges — Category badge'),SC('ti-user','Avatars — Author byline'),SC('ti-clock','— Read-time indicator (text + icon atom)'),SC('ti-calendar','— Publish date (text atom)'),SC('ti-tags','Tags — Tag group'),SC('ti-layout-grid','Blog sections — Related posts (3-up)'),SC('ti-speakerphone','CTA sections — Mid-page trial banner'),SS_FOOTER]},
+  {name:'Category archive',url:'blog.clicksend.com/category/{slug}/',type:'blog',domain:'blog.clicksend.com',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Simple listing header'),SC('ti-layout-grid','Blog sections — Archive grid (2-col)'),SS_FOOTER]},
+  {name:'eGuide landing — SMB SMS Guide',url:'try.clicksend.com/en/smb-sms-guide/',type:'landing',domain:'try.clicksend.com',note:'Stripped-down chrome — no primary nav, minimal footer. Single conversion goal.',components:[SC('ti-layout-navbar','Header navigations — Minimal (logo + Login/Sign Up only)'),SC('ti-layout-columns','Header sections — Split image hero (single CTA)'),SC('ti-list','Features sections — Value-prop bullet list'),SC('ti-mail','Newsletter CTA sections — Single-field email capture'),SC('ti-shield','— Microcopy / consent note (text atom)'),SC('ti-alert-circle','Inputs — Inline form validation error state'),SC('ti-circle-check','Modals — Form success modal'),SC('ti-layout-bottombar','Footers — Minimal (copyright + privacy only)')]},
+  {name:'Demo / qualification page',url:'clicksend.com/gb/demo/',type:'landing',domain:'try.clicksend.com',note:'Previously on try.* — now redirects to clicksend.com/demo/. Wears full site chrome.',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SC('ti-layout-grid','Features sections — Benefit trio (3-up icons)'),SC('ti-forms','Contact sections — Multi-input qualification form'),SC('ti-toggle-left','Toggles — Product interest icon toggle group'),SS_LOGO,SC('ti-chart-bar','Metrics sections'),SS_FOOTER]},
+];
+
+const STR_TYPE_LABELS = {marketing:'Marketing',subproduct:'Sub-product',pricing:'Pricing',overview:'Overview',solution:'Solution detail',industry:'Industry detail',blog:'Blog',landing:'Landing page'};
+const STR_TYPE_CLASSES = {marketing:'str-b-marketing',subproduct:'str-b-subproduct',pricing:'str-b-pricing',overview:'str-b-overview',solution:'str-b-solution',industry:'str-b-industry',blog:'str-b-marketing',landing:'str-b-landing'};
+
+function buildStructures(pages) {
+  const list = document.getElementById('str-list');
+  if(!list) return;
+  document.getElementById('str-count').textContent = pages.length + ' page' + (pages.length !== 1 ? 's' : '');
+  if(!pages.length) { list.innerHTML = '<div class="empty"><i class="ti ti-search-off"></i>No pages match</div>'; return; }
+  list.innerHTML = pages.map((p, i) => `
+    <div class="str-card" id="strc${i}">
+      <div class="str-header" onclick="togStr(${i})">
+        <span class="str-badge ${STR_TYPE_CLASSES[p.type]}">${STR_TYPE_LABELS[p.type]}</span>
+        <span class="str-page-name">${p.name}</span>
+        <span class="str-url"><i class="ti ti-external-link" style="font-size:10px" aria-hidden="true"></i>${p.url}</span>
+        <i class="ti ti-chevron-down str-chevron" aria-hidden="true"></i>
+      </div>
+      <div class="str-body">
+        ${p.components.map(c => `
+          <div class="str-row${c.scratch ? ' scratch' : ''}">
+            <i class="ti ${c.icon}" aria-hidden="true"></i>
+            ${c.label}
+            ${c.scratch ? '<span class="str-build-tag">Build</span>' : ''}
+          </div>`).join('')}
+        ${p.note ? `<div class="str-note">${p.note}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+function togStr(i) { document.getElementById('strc' + i).classList.toggle('open'); }
+
+function filterStructures() {
+  const q = document.getElementById('str-search').value.toLowerCase();
+  const t = document.getElementById('str-type').value;
+  const d = document.getElementById('str-domain').value;
+  buildStructures(STR_PAGES.filter(p => {
+    const md = !d || (p.domain || 'clicksend.com') === d;
+    const mt = !t || p.type === t;
+    const mq = !q || p.name.toLowerCase().includes(q) || p.url.includes(q) || p.components.some(c => c.label.toLowerCase().includes(q));
+    return md && mt && mq;
+  }));
+}
+
+buildStructures(STR_PAGES);
 
 
 function togglePhase(el) {
