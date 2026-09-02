@@ -50,7 +50,7 @@
     "Trustpilot / G2 / Capterra": "ready",
     "Stat Callout": "ready",
     "Single-Field Lead Capture": "ready",
-    "Multi-Input Qualification": "notstarted",
+    "Multi-Input Qualification": "ready",
     "Form Success Modal": "notstarted",
     "Inline Form Validation": "ready",
     "Pricing Calculator": "ready",
@@ -227,7 +227,8 @@
     "Product Hero": "Header section/Card mockup 12",
     "Split Marketing Hero": "Header section/Card mockup 12",
     "Product Tab Bar": "Tabs/Product",
-    "Single-Field Lead Capture": "Header section/Split image 07"
+    "Single-Field Lead Capture": "Header section/Split image 07",
+    "Multi-Input Qualification": "Header section/Split form 02"
   },
   "deliverables": {
     "p3-2": false,
@@ -235,5 +236,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-02T15:24:46.824Z"
+  "saved_at": "2026-09-02T15:25:18.823Z"
 }
