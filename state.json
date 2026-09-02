@@ -60,8 +60,8 @@
     "Minimal Footer": "ready",
     "Split Marketing Hero": "notstarted",
     "Product Hero": "notstarted",
-    "Directory Hero": "notstarted",
-    "Detail Page Hero": "ready",
+    "Directory Hero": "ready",
+    "Detail Page Hero": "inprog",
     "Pricing Hero": "ready",
     "Lead-Magnet Hero": "ready",
     "Demo Hero": "notstarted",
@@ -222,7 +222,8 @@
     "Listing Header": "Blog page header/Featured post 01",
     "Blog Content Rails": "Blog page header/Featured post 01",
     "Lead-Magnet Hero": "Header sections/Email + name capture",
-    "Detail Page Hero": "Header section/Center, Buttons, Default"
+    "Detail Page Hero": "",
+    "Directory Hero": "Header section/Center, Buttons, Default"
   },
   "deliverables": {
     "p3-2": false,
@@ -230,5 +231,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-02T10:24:41.961Z"
+  "saved_at": "2026-09-02T11:22:11.849Z"
 }
