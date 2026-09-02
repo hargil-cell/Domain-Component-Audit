@@ -59,7 +59,7 @@
     "Global Footer": "ready",
     "Minimal Footer": "ready",
     "Split Marketing Hero": "notstarted",
-    "Product Hero": "notstarted",
+    "Product Hero": "ready",
     "Directory Hero": "ready",
     "Detail Page Hero": "ready",
     "Pricing Hero": "ready",
@@ -223,7 +223,8 @@
     "Blog Content Rails": "Blog page header/Featured post 01",
     "Lead-Magnet Hero": "Header sections/Email + name capture",
     "Detail Page Hero": "Header section/Card mockup 12",
-    "Directory Hero": "Header section/Center, Buttons, Default"
+    "Directory Hero": "Header section/Center, Buttons, Default",
+    "Product Hero": "Header section/Card mockup 12"
   },
   "deliverables": {
     "p3-2": false,
@@ -231,5 +232,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-02T11:24:05.813Z"
+  "saved_at": "2026-09-02T11:31:37.326Z"
 }
