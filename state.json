@@ -61,7 +61,7 @@
     "Split Marketing Hero": "notstarted",
     "Product Hero": "notstarted",
     "Directory Hero": "ready",
-    "Detail Page Hero": "inprog",
+    "Detail Page Hero": "ready",
     "Pricing Hero": "ready",
     "Lead-Magnet Hero": "ready",
     "Demo Hero": "notstarted",
@@ -141,7 +141,7 @@
     "Split Marketing Hero": "Home page hero",
     "Product Hero": "SMS page + RCS page hero",
     "Directory Hero": "Solutions/Industries directory minimal hero",
-    "Detail Page Hero": "+ ",
+    "Detail Page Hero": "+ social proof full width",
     "Pricing Hero": "",
     "Lead-Magnet Hero": "LP template hero",
     "Demo Hero": "",
@@ -231,5 +231,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-02T11:23:49.488Z"
+  "saved_at": "2026-09-02T11:24:05.813Z"
 }
