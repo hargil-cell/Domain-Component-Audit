@@ -222,7 +222,7 @@
     "Listing Header": "Blog page header/Featured post 01",
     "Blog Content Rails": "Blog page header/Featured post 01",
     "Lead-Magnet Hero": "Header sections/Email + name capture",
-    "Detail Page Hero": "",
+    "Detail Page Hero": "Header section/Card mockup ",
     "Directory Hero": "Header section/Center, Buttons, Default"
   },
   "deliverables": {
@@ -231,5 +231,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-02T11:22:11.849Z"
+  "saved_at": "2026-09-02T11:23:41.525Z"
 }
