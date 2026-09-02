@@ -229,7 +229,7 @@
     "Product Tab Bar": "Tabs/Product",
     "Single-Field Lead Capture": "Header section/Split image 07",
     "Multi-Input Qualification": "Header section/Split form 02",
-    "Form Success Modal": "Banner"
+    "Form Success Modal": "Banners/Banner/Type=Slim"
   },
   "deliverables": {
     "p3-2": false,
@@ -237,5 +237,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-02T15:25:36.298Z"
+  "saved_at": "2026-09-02T15:25:58.171Z"
 }
