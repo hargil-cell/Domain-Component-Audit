@@ -62,7 +62,7 @@
     "Product Hero": "notstarted",
     "Directory Hero": "notstarted",
     "Detail Page Hero": "notstarted",
-    "Pricing Hero": "notstarted",
+    "Pricing Hero": "ready",
     "Lead-Magnet Hero": "ready",
     "Demo Hero": "notstarted",
     "Featured Post Carousel": "ready",
@@ -229,5 +229,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-02T10:14:12.436Z"
+  "saved_at": "2026-09-02T10:15:22.194Z"
 }
