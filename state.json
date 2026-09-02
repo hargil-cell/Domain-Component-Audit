@@ -221,7 +221,8 @@
     "Post Hero": "Blog post page header/Large image 01",
     "Listing Header": "Blog page header/Featured post 01",
     "Blog Content Rails": "Blog page header/Featured post 01",
-    "Lead-Magnet Hero": "Header sections/Email + name capture"
+    "Lead-Magnet Hero": "Header sections/Email + name capture",
+    "Detail Page Hero": "Header section/"
   },
   "deliverables": {
     "p3-2": false,
@@ -229,5 +230,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-02T10:24:21.651Z"
+  "saved_at": "2026-09-02T10:24:29.690Z"
 }
