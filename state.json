@@ -220,7 +220,8 @@
     "Featured Post Carousel": "Blog page header/Featured post 01",
     "Post Hero": "Blog post page header/Large image 01",
     "Listing Header": "Blog page header/Featured post 01",
-    "Blog Content Rails": "Blog page header/Featured post 01"
+    "Blog Content Rails": "Blog page header/Featured post 01",
+    "Lead-Magnet Hero": "Header sections/Email + name capture"
   },
   "deliverables": {
     "p3-2": false,
@@ -228,5 +229,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-01T11:59:40.351Z"
+  "saved_at": "2026-09-02T10:14:04.793Z"
 }
