@@ -79,6 +79,7 @@
     "Mid-Page Trial Banner": "notstarted",
     "Mid-Page Social-Proof Banner": "notstarted"
   },
+  "page_status": {},
   "tracker_notes": {
     "Primary CTA Button": "",
     "Secondary Button": "",
@@ -237,5 +238,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-03T10:40:47.742Z"
+  "saved_at": "2026-09-03T10:52:01.011Z"
 }
