@@ -236,6 +236,18 @@ tbody tr:last-child td{border-bottom:none}
 .str-row.scratch i{color:var(--amber-text)}
 .str-build-tag{font-size:9px;padding:1px 5px;border-radius:4px;background:var(--amber-bg);color:var(--amber-text);margin-left:auto;flex-shrink:0}
 .str-note{font-size:10px;color:var(--text3);padding:6px 14px;border-top:0.5px solid var(--border);font-style:italic}
+.str-url-link{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:3px;flex-shrink:0;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none;cursor:pointer}
+.str-url-link:hover{color:var(--blue-text);text-decoration:underline}
+.str-status-select{font-size:10px;padding:3px 22px 3px 7px;border-radius:20px;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text);cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;text-align:center;flex-shrink:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center}
+.str-status-select.ss-notstarted{background:var(--bg2);color:var(--text3);border-color:var(--border2)}
+.str-status-select.ss-inprog{background:var(--blue-bg);color:var(--blue-text);border-color:var(--blue-border)}
+.str-status-select.ss-copyready{background:var(--amber-bg);color:var(--amber-text);border-color:var(--amber-border)}
+.str-status-select.ss-imgready{background:#2a1500;color:#fb923c;border-color:#7c3c0a}
+.str-status-select.ss-ready{background:var(--green-bg);color:var(--green-text);border-color:var(--green-border)}
+.str-header-meta{display:flex;align-items:center;gap:8px;margin-left:auto}
+.str-progress-bar{height:4px;border-radius:2px;background:var(--bg3);margin:0 0 12px;overflow:hidden}
+.str-progress-fill{height:100%;border-radius:2px;background:var(--green-border);transition:width .3s}
+.str-progress-label{font-size:10px;color:var(--text3);margin-bottom:6px}
 
 .empty i{font-size:32px;display:block;margin-bottom:8px;opacity:.4}
 
@@ -675,6 +687,8 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
         </div>
         <span class="filter-count" id="str-count"></span>
       </div>
+      <div class="str-progress-label" id="str-prog-label">0% of pages ready for development</div>
+      <div class="str-progress-bar"><div class="str-progress-fill" id="str-prog-fill" style="width:0%"></div></div>
       <div id="str-list"></div>
     </div>
 
@@ -978,6 +992,7 @@ function saveMappingNote(el, url, component) {
   const key = url + '||' + component;
   MAPPING_NOTES[key] = el.value;
   localStorage.setItem('cs_mapping_notes', JSON.stringify(MAPPING_NOTES));
+  localStorage.setItem('cs_page_status', JSON.stringify(PAGE_STATUS));
   scheduleSync();
 }
 
@@ -1733,6 +1748,7 @@ function setSyncStatus(msg, color) {
 function gatherState() {
   return {
     tracker_status:  TRACKER_STATUS,
+    page_status:     PAGE_STATUS,
     tracker_notes:   TRACKER_NOTES,
     tracker_uitcomp: window.TRACKER_UIT_COMP || {},
     deliverables:    DELIVERABLE_STATE,
@@ -1747,11 +1763,13 @@ function applyState(state) {
   if(state.tracker_notes)   Object.assign(TRACKER_NOTES, state.tracker_notes);
   if(state.tracker_uitcomp) Object.assign(window.TRACKER_UIT_COMP, state.tracker_uitcomp);
   if(state.deliverables)    Object.assign(DELIVERABLE_STATE, state.deliverables);
+  if(state.page_status)     Object.assign(PAGE_STATUS, state.page_status);
   if(state.mapping_notes)   Object.assign(MAPPING_NOTES, state.mapping_notes);
   // persist to localStorage
   saveTrackerState();
   localStorage.setItem('cs_deliverables', JSON.stringify(DELIVERABLE_STATE));
   localStorage.setItem('cs_mapping_notes', JSON.stringify(MAPPING_NOTES));
+  localStorage.setItem('cs_page_status', JSON.stringify(PAGE_STATUS));
   // re-render
   document.getElementById('trk-body').innerHTML = '';
   buildTrackerRows();
@@ -1918,55 +1936,101 @@ const SS_CODE = SC('ti-code','Code snippets — Vertical tabs');
 const SS_PLUG = SC('ti-plug','Features sections — Integration logos');
 const SS_REVIEWS = SC('ti-message-circle','Social proof sections — Review quotes');
 
+const PAGE_STATUS = JSON.parse(localStorage.getItem('cs_page_status') || '{}');
+function savePageStatus() { localStorage.setItem('cs_page_status', JSON.stringify(PAGE_STATUS)); }
+
 const STR_PAGES = [
-  {name:'Homepage',url:'clicksend.com/gb/',type:'marketing',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_LOGO,SS_ICARDS,SS_ALT1,SS_CODE,SC('ti-plug','Social proof sections — Integration partner logos'),SS_ICONS2,SC('ti-chart-bar','Metrics sections'),SS_CTA,SS_TP,SS_FOOTER]},
-  {name:'SMS product landing',url:'clicksend.com/gb/sms/',type:'marketing',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ICARDS,SS_ALT2,SS_ICONS2,SS_LOGO,SS_FAQ,SS_CTA,SS_FOOTER]},
-  {name:'Bulk SMS',url:'clicksend.com/gb/sms/bulk-sms/',type:'subproduct',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_LOGO,SS_ALT1,SS_ALT2,SS_STEPS,SS_ICARDS,SS_ICONS2,SS_REVIEWS,SS_FAQ,SS_CTA,SS_TP,SS_FOOTER]},
-  {name:'SMS Marketing',url:'clicksend.com/gb/sms/sms-marketing/',type:'subproduct',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_STEPS,SS_ALT2,SS_ILIST,SS_ICONS2,SS_ICARDS,SS_TMPL,SS_FAQ,SS_CTA,SS_TP,SS_FOOTER]},
-  {name:'SMS API',url:'clicksend.com/gb/sms/sms-gateway-api/',type:'subproduct',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_CODE,SS_ICONS2,SS_ALT2,SS_ICONS1,SS_CTA,SS_FOOTER]},
-  {name:'Rich Messaging',url:'clicksend.com/gb/rich-messaging/',type:'marketing',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero + channel icons'),SS_ICARDS,SS_ALT1,SC('ti-mail','Newsletter CTA sections — Early access form'),SS_FOOTER]},
-  {name:'Pricing',url:'clicksend.com/gb/pricing/',type:'pricing',components:[SS_SHELL,SC('ti-bell','Banners — Promo bar'),SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SC('ti-layout-columns','Horizontal tabs — SMS / MMS / Voice / Email / Fax / Post'),SC('ti-currency-pound','Pricing sections — Pricing cards (4 tiers)'),SC('ti-adjustments','Sliders — Volume estimator'),SS_ICONS2,SC('ti-table','Pricing sections — Comparison table'),SC('ti-alert-triangle','Alerts — Deprecation notices'),SS_CTA,SS_FOOTER]},
-  {name:'Solutions overview',url:'clicksend.com/gb/solutions/',type:'overview',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SS_ICARDS,SS_CTA,SS_FOOTER]},
-  {name:'Solution — Alerts & Notifications',url:'clicksend.com/gb/solutions/alerts-and-notifications/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ILIST,SS_ALT2,SS_ICONS2,SS_CTA,SS_FOOTER]},
-  {name:'Solution — Customer Support',url:'clicksend.com/gb/solutions/customer-support/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_PLUG,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
-  {name:'Solution — Marketing & Lead Management',url:'clicksend.com/gb/solutions/marketing-and-lead-management/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ICONS2,SS_TMPL,SS_CTA,SS_FOOTER]},
-  {name:'Solution — Ordering & Delivery',url:'clicksend.com/gb/solutions/ordering-and-delivery/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
-  {name:'Solution — Reminders',url:'clicksend.com/gb/solutions/reminders/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_STEPS,SS_ALT2,SS_TMPL,SS_CTA,SS_FOOTER]},
-  {name:'Solution — 2 Factor Authentication',url:'clicksend.com/gb/solutions/2-factor-authentication-otp/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SC('ti-table','Features sections — Comparison table (SMS OTP vs alternatives)'),SS_ICONS2,SS_CTA,SS_FOOTER]},
-  {name:'Solution — Sales Automation',url:'clicksend.com/gb/solutions/sales-automation/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
-  {name:'Solution — Event Management',url:'clicksend.com/gb/solutions/event-management/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_REVIEWS,SS_CTA,SS_FOOTER]},
-  {name:'Solution — People Management',url:'clicksend.com/gb/solutions/people-management/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
-  {name:'Solution — Business Continuity',url:'clicksend.com/gb/solutions/business-continuity-sms/',type:'solution',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ICONS2,SS_CTA,SS_TP,SS_FOOTER]},
-  {name:'Industries overview',url:'clicksend.com/gb/industries/',type:'overview',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SS_BADGE,SS_ICARDS,SS_CTA,SS_FOOTER],note:'~24 industry cards. Award badge is build from scratch.'},
-  {name:'Industry — Retail',url:'clicksend.com/gb/industries/retail/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_ALT3,SS_ALT4,SS_CTA,SS_FOOTER]},
-  {name:'Industry — Banking & Finance',url:'clicksend.com/gb/industries/banking-and-finance/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
-  {name:'Industry — eCommerce',url:'clicksend.com/gb/industries/ecommerce/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
-  {name:'Industry — Call Centres',url:'clicksend.com/gb/industries/call-centres/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
-  {name:'Industry — Transport & Logistics',url:'clicksend.com/gb/industries/transport-and-logistics/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
-  {name:'Industry — Manufacturing',url:'clicksend.com/gb/industries/manufacturing/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
-  {name:'Industry — Not-for-Profit',url:'clicksend.com/gb/industries/not-for-profit/',type:'industry',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_REVIEWS,SS_CTA,SS_FOOTER]},
-  {name:'Industry — Marketing Agencies',url:'clicksend.com/gb/industries/marketing/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ICONS2,SS_PLUG,SS_CTA,SS_FOOTER]},
-  {name:'Blog home',url:'blog.clicksend.com/',type:'blog',domain:'blog.clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Featured post carousel hero'),SC('ti-layout-grid','Blog sections — Popular posts (2-up)'),SC('ti-filter','Filters — Category dropdown'),SC('ti-layout-grid','Blog sections — Latest posts grid (4-up)'),SC('ti-carousel','Blog sections — Dev Tips carousel'),SC('ti-layout-grid','Blog sections — Case study grid'),SC('ti-speakerphone','CTA sections — Mid-page trial banner'),SC('ti-building-store','Social proof sections — Social proof banner'),SC('ti-layout-rows','Pagination — Numbered pagination'),SS_FOOTER]},
-  {name:'Standard article',url:'blog.clicksend.com/{slug}/',type:'blog',domain:'blog.clicksend.com',note:'Article body is JS-rendered — in-body elements (code blocks, headings, inline CTAs) are unverified.',components:[SS_SHELL,SC('ti-layout-columns','Blog post sections — Post hero (full-width image)'),SC('ti-tag','Badges — Category badge'),SC('ti-user','Avatars — Author byline'),SC('ti-clock','— Read-time indicator (text + icon atom)'),SC('ti-calendar','— Publish date (text atom)'),SC('ti-tags','Tags — Tag group'),SC('ti-layout-grid','Blog sections — Related posts (3-up)'),SC('ti-speakerphone','CTA sections — Mid-page trial banner'),SS_FOOTER]},
-  {name:'Category archive',url:'blog.clicksend.com/category/{slug}/',type:'blog',domain:'blog.clicksend.com',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Simple listing header'),SC('ti-layout-grid','Blog sections — Archive grid (2-col)'),SS_FOOTER]},
-  {name:'eGuide landing — SMB SMS Guide',url:'try.clicksend.com/en/smb-sms-guide/',type:'landing',domain:'try.clicksend.com',note:'Stripped-down chrome — no primary nav, minimal footer. Single conversion goal.',components:[SC('ti-layout-navbar','Header navigations — Minimal (logo + Login/Sign Up only)'),SC('ti-layout-columns','Header sections — Split image hero (single CTA)'),SC('ti-list','Features sections — Value-prop bullet list'),SC('ti-mail','Newsletter CTA sections — Single-field email capture'),SC('ti-shield','— Microcopy / consent note (text atom)'),SC('ti-alert-circle','Inputs — Inline form validation error state'),SC('ti-circle-check','Modals — Form success modal'),SC('ti-layout-bottombar','Footers — Minimal (copyright + privacy only)')]},
-  {name:'Demo / qualification page',url:'clicksend.com/gb/demo/',type:'landing',domain:'try.clicksend.com',note:'Previously on try.* — now redirects to clicksend.com/demo/. Wears full site chrome.',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SC('ti-layout-grid','Features sections — Benefit trio (3-up icons)'),SC('ti-forms','Contact sections — Multi-input qualification form'),SC('ti-toggle-left','Toggles — Product interest icon toggle group'),SS_LOGO,SC('ti-chart-bar','Metrics sections'),SS_FOOTER]},
+  // ── clicksend.com ─────────────────────────────────────────────────────
+  {name:'Homepage',url:'https://www.clicksend.com/gb/',type:'marketing',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_LOGO,SS_ICARDS,SS_ALT1,SS_CODE,SC('ti-plug','Social proof sections — Integration partner logos'),SS_ICONS2,SC('ti-chart-bar','Metrics sections'),SS_CTA,SS_TP,SS_FOOTER]},
+  {name:'SMS product landing',url:'https://www.clicksend.com/gb/sms/',type:'marketing',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ICARDS,SS_ALT2,SS_ICONS2,SS_LOGO,SS_FAQ,SS_CTA,SS_FOOTER]},
+  {name:'Bulk SMS',url:'https://www.clicksend.com/gb/sms/bulk-sms/',type:'subproduct',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_LOGO,SS_ALT1,SS_ALT2,SS_STEPS,SS_ICARDS,SS_ICONS2,SS_REVIEWS,SS_FAQ,SS_CTA,SS_TP,SS_FOOTER]},
+  {name:'SMS Marketing',url:'https://www.clicksend.com/gb/sms/sms-marketing/',type:'subproduct',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_STEPS,SS_ALT2,SS_ILIST,SS_ICONS2,SS_ICARDS,SS_TMPL,SS_FAQ,SS_CTA,SS_TP,SS_FOOTER]},
+  {name:'SMS API',url:'https://www.clicksend.com/gb/sms/sms-gateway-api/',type:'subproduct',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_CODE,SS_ICONS2,SS_ALT2,SS_ICONS1,SS_CTA,SS_FOOTER]},
+  {name:'Rich Messaging',url:'https://www.clicksend.com/gb/rich-messaging/',type:'marketing',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero + channel icons'),SS_ICARDS,SS_ALT1,SC('ti-mail','Newsletter CTA sections — Early access form'),SS_FOOTER]},
+  {name:'Pricing',url:'https://www.clicksend.com/gb/pricing/',type:'pricing',domain:'clicksend.com',components:[SS_SHELL,SC('ti-bell','Banners — Promo bar'),SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SC('ti-layout-columns','Horizontal tabs — SMS / MMS / Voice / Email / Fax / Post'),SC('ti-currency-pound','Pricing sections — Pricing cards (4 tiers)'),SC('ti-adjustments','Sliders — Volume estimator'),SS_ICONS2,SC('ti-table','Pricing sections — Comparison table'),SC('ti-alert-triangle','Alerts — Deprecation notices'),SS_CTA,SS_FOOTER]},
+  {name:'Solutions overview',url:'https://www.clicksend.com/gb/solutions/',type:'overview',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SS_ICARDS,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Alerts & Notifications',url:'https://www.clicksend.com/gb/solutions/alerts-and-notifications/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ILIST,SS_ALT2,SS_ICONS2,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Customer Support',url:'https://www.clicksend.com/gb/solutions/customer-support/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_PLUG,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Marketing & Lead Management',url:'https://www.clicksend.com/gb/solutions/marketing-and-lead-management/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ICONS2,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Ordering & Delivery',url:'https://www.clicksend.com/gb/solutions/ordering-and-delivery/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Reminders',url:'https://www.clicksend.com/gb/solutions/reminders/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_STEPS,SS_ALT2,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Solution — 2 Factor Authentication',url:'https://www.clicksend.com/gb/solutions/2-factor-authentication-otp/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SC('ti-table','Features sections — Comparison table (SMS OTP vs alternatives)'),SS_ICONS2,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Sales Automation',url:'https://www.clicksend.com/gb/solutions/sales-automation/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Event Management',url:'https://www.clicksend.com/gb/solutions/event-management/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_REVIEWS,SS_CTA,SS_FOOTER]},
+  {name:'Solution — People Management',url:'https://www.clicksend.com/gb/solutions/people-management/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Solution — Business Continuity',url:'https://www.clicksend.com/gb/solutions/business-continuity-sms/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ICONS2,SS_CTA,SS_TP,SS_FOOTER]},
+  {name:'Solution — Billing & Collections',url:'https://www.clicksend.com/gb/solutions/billing-and-collections/',type:'solution',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industries overview',url:'https://www.clicksend.com/gb/industries/',type:'overview',domain:'clicksend.com',note:'~24 industry cards. Award badge is build from scratch.',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SS_BADGE,SS_ICARDS,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Automotive',url:'https://www.clicksend.com/gb/industries/automotive/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Banking & Finance',url:'https://www.clicksend.com/gb/industries/banking-and-finance/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Beauty & Hair',url:'https://www.clicksend.com/gb/industries/beauty-hair/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Call Centres',url:'https://www.clicksend.com/gb/industries/call-centres/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — eCommerce',url:'https://www.clicksend.com/gb/industries/ecommerce/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Education',url:'https://www.clicksend.com/gb/industries/education/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Government',url:'https://www.clicksend.com/gb/industries/government/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Healthcare',url:'https://www.clicksend.com/gb/industries/healthcare/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_ALT3,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Human Resources',url:'https://www.clicksend.com/gb/industries/human-resources/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Information Technology',url:'https://www.clicksend.com/gb/industries/information-technology/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ICONS2,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Insurance',url:'https://www.clicksend.com/gb/industries/insurance/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Manufacturing',url:'https://www.clicksend.com/gb/industries/manufacturing/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Marketing Agencies',url:'https://www.clicksend.com/gb/industries/marketing/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ICONS2,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Not-for-Profit',url:'https://www.clicksend.com/gb/industries/not-for-profit/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_REVIEWS,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Real Estate',url:'https://www.clicksend.com/gb/industries/real-estate/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Restaurants & Bars',url:'https://www.clicksend.com/gb/industries/restaurants-bars/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Retail',url:'https://www.clicksend.com/gb/industries/retail/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_ALT3,SS_ALT4,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Sport & Fitness',url:'https://www.clicksend.com/gb/industries/sport-fitness/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Telecommunications',url:'https://www.clicksend.com/gb/industries/telecommunications/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Transport & Logistics',url:'https://www.clicksend.com/gb/industries/transport-and-logistics/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_TMPL,SS_PLUG,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Travel & Hotels',url:'https://www.clicksend.com/gb/industries/travel-hotels/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_TMPL,SS_CTA,SS_FOOTER]},
+  {name:'Industry — Utilities',url:'https://www.clicksend.com/gb/industries/utilities/',type:'industry',domain:'clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Split image hero'),SS_BADGE,SS_ALT1,SS_ALT2,SS_ILIST,SS_CTA,SS_FOOTER]},
+  // ── blog.clicksend.com ────────────────────────────────────────────────
+  {name:'Blog home',url:'https://blog.clicksend.com/',type:'blog',domain:'blog.clicksend.com',components:[SS_SHELL,SC('ti-layout-columns','Header sections — Featured post carousel hero'),SC('ti-layout-grid','Blog sections — Popular posts (2-up)'),SC('ti-filter','Filters — Category dropdown'),SC('ti-layout-grid','Blog sections — Latest posts grid (4-up)'),SC('ti-carousel','Blog sections — Dev Tips carousel'),SC('ti-layout-grid','Blog sections — Case study grid'),SC('ti-speakerphone','CTA sections — Mid-page trial banner'),SC('ti-building-store','Social proof sections — Social proof banner'),SC('ti-layout-rows','Pagination — Numbered pagination'),SS_FOOTER]},
+  {name:'Standard article',url:'https://blog.clicksend.com/{slug}/',type:'blog',domain:'blog.clicksend.com',note:'Article body is JS-rendered — in-body elements (code blocks, headings, inline CTAs) are unverified.',components:[SS_SHELL,SC('ti-layout-columns','Blog post sections — Post hero (full-width image)'),SC('ti-tag','Badges — Category badge'),SC('ti-user','Avatars — Author byline'),SC('ti-clock','— Read-time indicator (text + icon atom)'),SC('ti-calendar','— Publish date (text atom)'),SC('ti-tags','Tags — Tag group'),SC('ti-layout-grid','Blog sections — Related posts (3-up)'),SC('ti-speakerphone','CTA sections — Mid-page trial banner'),SS_FOOTER]},
+  {name:'Category archive',url:'https://blog.clicksend.com/category/{slug}/',type:'blog',domain:'blog.clicksend.com',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Simple listing header'),SC('ti-layout-grid','Blog sections — Archive grid (2-col)'),SS_FOOTER]},
+  // ── try.clicksend.com ─────────────────────────────────────────────────
+  {name:'eGuide landing — SMB SMS Guide',url:'https://try.clicksend.com/en/smb-sms-guide/',type:'landing',domain:'try.clicksend.com',note:'Stripped-down chrome — no primary nav, minimal footer. Single conversion goal.',components:[SC('ti-layout-navbar','Header navigations — Minimal (logo + Login/Sign Up only)'),SC('ti-layout-columns','Header sections — Split image hero (single CTA)'),SC('ti-list','Features sections — Value-prop bullet list'),SC('ti-mail','Newsletter CTA sections — Single-field email capture'),SC('ti-shield','— Microcopy / consent note (text atom)'),SC('ti-alert-circle','Inputs — Inline form validation error state'),SC('ti-circle-check','Modals — Form success modal'),SC('ti-layout-bottombar','Footers — Minimal (copyright + privacy only)')]},
+  {name:'Demo / qualification page',url:'https://www.clicksend.com/gb/demo/',type:'landing',domain:'try.clicksend.com',note:'Previously on try.* — now redirects to clicksend.com/demo/. Wears full site chrome.',components:[SS_SHELL,SC('ti-layout-distribute-horizontal','Header sections — Centred hero'),SC('ti-layout-grid','Features sections — Benefit trio (3-up icons)'),SC('ti-forms','Contact sections — Multi-input qualification form'),SC('ti-toggle-left','Toggles — Product interest icon toggle group'),SS_LOGO,SC('ti-chart-bar','Metrics sections'),SS_FOOTER]},
 ];
 
 const STR_TYPE_LABELS = {marketing:'Marketing',subproduct:'Sub-product',pricing:'Pricing',overview:'Overview',solution:'Solution detail',industry:'Industry detail',blog:'Blog',landing:'Landing page'};
 const STR_TYPE_CLASSES = {marketing:'str-b-marketing',subproduct:'str-b-subproduct',pricing:'str-b-pricing',overview:'str-b-overview',solution:'str-b-solution',industry:'str-b-industry',blog:'str-b-marketing',landing:'str-b-landing'};
 
+function strStatusClass(v){return{notstarted:'ss-notstarted',inprog:'ss-inprog',copyready:'ss-copyready',imgready:'ss-imgready',ready:'ss-ready'}[v]||'ss-notstarted';}
+
 function buildStructures(pages) {
   const list = document.getElementById('str-list');
   if(!list) return;
-  document.getElementById('str-count').textContent = pages.length + ' page' + (pages.length !== 1 ? 's' : '');
+
+  // progress summary
+  const total = STR_PAGES.length;
+  const ready = Object.values(PAGE_STATUS).filter(s=>s==='ready').length;
+  const pct = Math.round(ready/total*100);
+  const countEl = document.getElementById('str-count');
+  if(countEl) countEl.textContent = pages.length + ' page' + (pages.length !== 1 ? 's' : '') + ' · ' + ready + '/' + total + ' ready';
+  const progFill = document.getElementById('str-prog-fill');
+  const progLabel = document.getElementById('str-prog-label');
+  if(progFill) progFill.style.width = pct + '%';
+  if(progLabel) progLabel.textContent = pct + '% of pages ready for development';
+
   if(!pages.length) { list.innerHTML = '<div class="empty"><i class="ti ti-search-off"></i>No pages match</div>'; return; }
-  list.innerHTML = pages.map((p, i) => `
+  list.innerHTML = pages.map((p, i) => {
+    const key = p.url;
+    const status = PAGE_STATUS[key] || 'notstarted';
+    return `
     <div class="str-card" id="strc${i}">
       <div class="str-header" onclick="togStr(${i})">
         <span class="str-badge ${STR_TYPE_CLASSES[p.type]}">${STR_TYPE_LABELS[p.type]}</span>
         <span class="str-page-name">${p.name}</span>
-        <span class="str-url"><i class="ti ti-external-link" style="font-size:10px" aria-hidden="true"></i>${p.url}</span>
+        <div class="str-header-meta" onclick="event.stopPropagation()">
+          <a class="str-url-link" href="${p.url}" target="_blank" rel="noopener"><i class="ti ti-external-link" style="font-size:10px" aria-hidden="true"></i>${p.url.replace('https://','')}</a>
+          <select class="str-status-select ${strStatusClass(status)}" onchange="setPageStatus('${key}', this.value, this)">
+            <option value="notstarted" ${status==='notstarted'?'selected':''}>Not started</option>
+            <option value="inprog" ${status==='inprog'?'selected':''}>In progress</option>
+            <option value="copyready" ${status==='copyready'?'selected':''}>Ready for copy</option>
+            <option value="imgready" ${status==='imgready'?'selected':''}>Ready for imagery</option>
+            <option value="ready" ${status==='ready'?'selected':''}>Ready ✓</option>
+          </select>
+        </div>
         <i class="ti ti-chevron-down str-chevron" aria-hidden="true"></i>
       </div>
       <div class="str-body">
@@ -1978,7 +2042,24 @@ function buildStructures(pages) {
           </div>`).join('')}
         ${p.note ? `<div class="str-note">${p.note}</div>` : ''}
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+}
+
+function setPageStatus(key, value, el) {
+  PAGE_STATUS[key] = value;
+  el.className = 'str-status-select ' + strStatusClass(value);
+  savePageStatus();
+  scheduleSync();
+  buildStructures(STR_PAGES.filter(p => {
+    const d = document.getElementById('str-domain') ? document.getElementById('str-domain').value : '';
+    const t = document.getElementById('str-type') ? document.getElementById('str-type').value : '';
+    const q = document.getElementById('str-search') ? document.getElementById('str-search').value.toLowerCase() : '';
+    const md = !d || (p.domain||'clicksend.com')===d;
+    const mt = !t || p.type===t;
+    const mq = !q || p.name.toLowerCase().includes(q)||p.url.includes(q)||p.components.some(c=>c.label.toLowerCase().includes(q));
+    return md&&mt&&mq;
+  }));
 }
 
 function togStr(i) { document.getElementById('strc' + i).classList.toggle('open'); }
