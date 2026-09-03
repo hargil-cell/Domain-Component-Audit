@@ -81,7 +81,8 @@
   },
   "page_status": {
     "https://www.clicksend.com/gb/": "notstarted",
-    "https://www.clicksend.com/gb/industries/": "copyready"
+    "https://www.clicksend.com/gb/industries/": "imgready",
+    "https://www.clicksend.com/gb/solutions/": "imgready"
   },
   "tracker_notes": {
     "Primary CTA Button": "",
@@ -241,5 +242,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-03T10:56:55.254Z"
+  "saved_at": "2026-09-03T12:01:40.494Z"
 }
