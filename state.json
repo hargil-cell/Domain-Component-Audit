@@ -87,7 +87,8 @@
     "https://blog.clicksend.com/": "imgready",
     "https://www.clicksend.com/gb/sms/bulk-sms/": "imgready",
     "https://www.clicksend.com/gb/sms/sms-marketing/": "copyready",
-    "https://www.clicksend.com/gb/sms/sms-gateway-api/": "imgready"
+    "https://www.clicksend.com/gb/sms/sms-gateway-api/": "imgready",
+    "https://www.clicksend.com/gb/sms/": "inprog"
   },
   "tracker_notes": {
     "Primary CTA Button": "",
@@ -247,5 +248,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-09T12:12:58.502Z"
+  "saved_at": "2026-09-09T12:13:08.220Z"
 }
