@@ -138,6 +138,18 @@
       "status": "Approved",
       "notes": "State (Default, Hover, Focused, Disabled, Loading, Active) Size (xl, lg, md, sm, xs) Icon-only",
       "id": 1789629306530
+    },
+    {
+      "name": "Button (Link color)",
+      "type": "main",
+      "tier": "Atom",
+      "parent": "",
+      "uit": "Button",
+      "use": "Text-only, no button shape at all — distinct from Tertiary, which still occupies a button-shaped hit area:",
+      "page": "",
+      "status": "Approved",
+      "notes": "State (Default, Hover, Focused, Disabled, Loading, Active) Size (xl, lg, md, sm, xs)",
+      "id": 1789629370096
     }
   ],
   "tracker_notes": {
@@ -298,5 +310,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-17T07:15:09.532Z"
+  "saved_at": "2026-09-17T07:16:13.097Z"
 }
