@@ -114,6 +114,18 @@
       "status": "Approved",
       "notes": "State (Default, Hover, Focused, Disabled, Loading, Active) Size (xl, lg, md, sm, xs) Icon-only, Microcopy",
       "id": 1789628746875
+    },
+    {
+      "name": "Button (Secondary)",
+      "type": "main",
+      "tier": "Atom",
+      "parent": "",
+      "uit": "Button",
+      "use": "Outlined style, equal visual presence to Primary but lower emphasis",
+      "page": "clicksend.com",
+      "status": "Approved",
+      "notes": "State (Default, Hover, Focused, Disabled, Loading, Active) Size (xl, lg, md, sm, xs) Icon-only",
+      "id": 1789629250034
     }
   ],
   "tracker_notes": {
@@ -274,5 +286,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-17T07:05:49.877Z"
+  "saved_at": "2026-09-17T07:14:13.037Z"
 }
