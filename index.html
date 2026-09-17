@@ -254,7 +254,8 @@ tbody tr:last-child td{border-bottom:none}
 .ac-action-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px;padding:2px 4px;border-radius:4px}
 .ac-action-btn:hover{color:var(--text);background:var(--bg3)}
 .ac-notes-cell{font-size:11px;color:var(--text3);font-style:italic}
-.ac-trunc{font-size:11px;color:var(--text2);max-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:default}
+.ac-trunc{font-size:11px;color:var(--text2);max-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:copy;position:relative}
+.ac-trunc:active{opacity:.6}
 .str-url-link{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:3px;flex-shrink:0;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none;cursor:pointer}
 .str-url-link:hover{color:var(--blue-text);text-decoration:underline}
 .str-status-select{font-size:10px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text);cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;text-align:center;text-align-last:center;flex-shrink:0}
@@ -2368,6 +2369,19 @@ function renderAc() {
 }
 
 renderAc();
+
+// click-to-copy for truncated cells
+document.getElementById('ac-body').addEventListener('click', function(e) {
+  const cell = e.target.closest('.ac-trunc');
+  if(!cell) return;
+  const text = cell.getAttribute('title');
+  if(!text || text === '✓ Copied!') return;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = cell.title;
+    cell.title = '✓ Copied!';
+    setTimeout(() => { cell.title = orig; }, 1500);
+  });
+});
 
 
 function togglePhase(el) {
