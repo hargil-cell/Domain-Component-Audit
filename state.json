@@ -126,6 +126,18 @@
       "status": "Approved",
       "notes": "State (Default, Hover, Focused, Disabled, Loading, Active) Size (xl, lg, md, sm, xs) Icon-only",
       "id": 1789629250034
+    },
+    {
+      "name": "Button (Tertiary)",
+      "type": "main",
+      "tier": "Atom",
+      "parent": "",
+      "uit": "Button",
+      "use": "No border or fill, the lowest visual weight. Use for supporting actions that shouldn't compete with Primary or Secondary.",
+      "page": "",
+      "status": "Approved",
+      "notes": "State (Default, Hover, Focused, Disabled, Loading, Active) Size (xl, lg, md, sm, xs) Icon-only",
+      "id": 1789629306530
     }
   ],
   "tracker_notes": {
@@ -286,5 +298,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-17T07:14:13.037Z"
+  "saved_at": "2026-09-17T07:15:09.532Z"
 }
