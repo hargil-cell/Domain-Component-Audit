@@ -183,7 +183,7 @@
       "uit": "Button",
       "use": "Icon-only is a fit when the icon is instantly recognizable on its own",
       "page": "",
-      "status": "Approved",
+      "status": "Published",
       "notes": "State (Default, Hover, Focused, Disabled, Loading) Size (xl, lg, md, sm, xs)",
       "id": 1789629542841
     }
@@ -346,5 +346,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-17T07:25:31.682Z"
+  "saved_at": "2026-09-17T07:25:35.489Z"
 }
