@@ -236,6 +236,24 @@ tbody tr:last-child td{border-bottom:none}
 .str-row.scratch i{color:var(--amber-text)}
 .str-build-tag{font-size:9px;padding:1px 5px;border-radius:4px;background:var(--amber-bg);color:var(--amber-text);margin-left:auto;flex-shrink:0}
 .str-note{font-size:10px;color:var(--text3);padding:6px 14px;border-top:0.5px solid var(--border);font-style:italic}
+.ac-summary{display:flex;align-items:center;gap:20px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:12px 18px;margin-bottom:1rem;flex-wrap:wrap}
+.ac-stat{display:flex;flex-direction:column;align-items:center;min-width:48px}
+.ac-stat-val{font-size:20px;font-weight:500;line-height:1}
+.ac-stat-label{font-size:10px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:.04em}
+.ac-add-btn{margin-left:auto;font-size:12px;padding:7px 14px;border-radius:20px;background:#2977FF;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;gap:5px}
+.ac-add-btn:hover{background:#1860F0}
+.ac-label{font-size:11px;color:var(--text3);display:block;margin-bottom:4px}
+.ac-input{width:100%;font-size:12px;padding:7px 10px;border-radius:var(--radius-md);border:0.5px solid var(--border2);background:var(--bg2);color:var(--text);font-family:inherit;box-sizing:border-box}
+.ac-input:focus{outline:none;border-color:#2977FF}
+.ac-badge-main{background:var(--blue-bg);color:var(--blue-text)}
+.ac-badge-sub{background:var(--bg3);color:var(--text3)}
+.ac-badge-draft{background:var(--bg3);color:var(--text3)}
+.ac-badge-approved{background:var(--blue-bg);color:var(--blue-text)}
+.ac-badge-published{background:var(--green-bg);color:var(--green-text)}
+.ac-actions{display:flex;gap:6px}
+.ac-action-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px;padding:2px 4px;border-radius:4px}
+.ac-action-btn:hover{color:var(--text);background:var(--bg3)}
+.ac-notes-cell{font-size:11px;color:var(--text3);font-style:italic}
 .str-url-link{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:3px;flex-shrink:0;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none;cursor:pointer}
 .str-url-link:hover{color:var(--blue-text);text-decoration:underline}
 .str-status-select{font-size:10px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text);cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;text-align:center;text-align-last:center;flex-shrink:0}
@@ -462,6 +480,7 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
       <button class="tab" onclick="switchTab('gap')"><i class="ti ti-table" aria-hidden="true" style="margin-right:5px"></i>Gap analysis</button>
       <button class="tab" onclick="switchTab('tracker')"><i class="ti ti-checkbox" aria-hidden="true" style="margin-right:5px"></i>Phase 3 tracker</button>
       <button class="tab" onclick="switchTab('structures')"><i class="ti ti-layout-rows" aria-hidden="true" style="margin-right:5px"></i>Page structures</button>
+      <button class="tab" onclick="switchTab('approved')"><i class="ti ti-circle-check" aria-hidden="true" style="margin-right:5px"></i>Approved components</button>
     </div>
 
     <div id="panel-gap" class="panel active">
@@ -690,6 +709,140 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
       <div class="str-progress-label" id="str-prog-label">0% of pages ready for development</div>
       <div class="str-progress-bar"><div class="str-progress-fill" id="str-prog-fill" style="width:0%"></div></div>
       <div id="str-list"></div>
+    </div>
+
+    <div id="panel-approved" class="panel">
+
+      <!-- Summary bar -->
+      <div class="ac-summary">
+        <div class="ac-stat"><span class="ac-stat-val" id="ac-total">0</span><span class="ac-stat-label">Total</span></div>
+        <div class="ac-stat"><span class="ac-stat-val" id="ac-published" style="color:var(--green-text)">0</span><span class="ac-stat-label">Published</span></div>
+        <div class="ac-stat"><span class="ac-stat-val" id="ac-approved" style="color:var(--blue-text)">0</span><span class="ac-stat-label">Approved</span></div>
+        <div class="ac-stat"><span class="ac-stat-val" id="ac-draft" style="color:var(--text3)">0</span><span class="ac-stat-label">Draft</span></div>
+        <button class="ac-add-btn" onclick="openAcModal()"><i class="ti ti-plus"></i> Add component</button>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <div class="search-wrap">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" id="ac-search" placeholder="Search components…" oninput="renderAc()">
+        </div>
+        <div class="filter-group">
+          <label>Type</label>
+          <select id="ac-filter-type" onchange="renderAc()">
+            <option value="">All</option>
+            <option value="main">Main published</option>
+            <option value="sub">Sub-component</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Tier</label>
+          <select id="ac-filter-tier" onchange="renderAc()">
+            <option value="">All tiers</option>
+            <option value="Atom">Atom</option>
+            <option value="Molecule">Molecule</option>
+            <option value="Organism">Organism</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Status</label>
+          <select id="ac-filter-status" onchange="renderAc()">
+            <option value="">All statuses</option>
+            <option value="Draft">Draft</option>
+            <option value="Approved">Approved</option>
+            <option value="Published">Published</option>
+          </select>
+        </div>
+        <span class="filter-count" id="ac-count"></span>
+      </div>
+
+      <!-- Table -->
+      <div class="tbl-wrap">
+        <table id="ac-table">
+          <thead>
+            <tr>
+              <th style="width:14%">Component name</th>
+              <th style="width:8%">Type</th>
+              <th style="width:8%">Tier</th>
+              <th style="width:14%">Parent component</th>
+              <th style="width:14%">UIT base</th>
+              <th style="width:14%">Intended use</th>
+              <th style="width:12%">Original use case page</th>
+              <th style="width:8%">Status</th>
+              <th style="width:8%">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ac-body"></tbody>
+        </table>
+        <div id="ac-empty" class="empty" style="display:none">
+          <i class="ti ti-components" aria-hidden="true"></i>
+          No components yet — click Add component to get started
+        </div>
+      </div>
+    </div>
+
+    <!-- Add / Edit modal -->
+    <div id="ac-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center">
+      <div style="background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;width:560px;max-width:95vw;max-height:90vh;overflow-y:auto">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+          <span style="font-weight:500;font-size:14px" id="ac-modal-title">Add component</span>
+          <button onclick="closeAcModal()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px"><i class="ti ti-x"></i></button>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="grid-column:1/-1">
+            <label class="ac-label">Component name</label>
+            <input id="ac-f-name" class="ac-input" placeholder="e.g. _Pricing tier card">
+          </div>
+          <div>
+            <label class="ac-label">Type</label>
+            <select id="ac-f-type" class="ac-input" onchange="toggleParentField()">
+              <option value="main">Main published component</option>
+              <option value="sub">Sub-component</option>
+            </select>
+          </div>
+          <div>
+            <label class="ac-label">Tier</label>
+            <select id="ac-f-tier" class="ac-input">
+              <option value="Atom">Atom</option>
+              <option value="Molecule">Molecule</option>
+              <option value="Organism">Organism</option>
+            </select>
+          </div>
+          <div id="ac-parent-wrap" style="grid-column:1/-1;display:none">
+            <label class="ac-label">Parent component</label>
+            <input id="ac-f-parent" class="ac-input" placeholder="e.g. Pricing sections">
+          </div>
+          <div style="grid-column:1/-1">
+            <label class="ac-label">UIT base component</label>
+            <input id="ac-f-uit" class="ac-input" placeholder="e.g. Pricing sections — Pricing cards, or Build from scratch">
+          </div>
+          <div style="grid-column:1/-1">
+            <label class="ac-label">Original use case page</label>
+            <input id="ac-f-page" class="ac-input" placeholder="e.g. clicksend.com/gb/pricing/">
+          </div>
+          <div style="grid-column:1/-1">
+            <label class="ac-label">Intended use</label>
+            <input id="ac-f-use" class="ac-input" placeholder="Short description of how and where this component is used">
+          </div>
+          <div>
+            <label class="ac-label">Status</label>
+            <select id="ac-f-status" class="ac-input">
+              <option value="Draft">Draft</option>
+              <option value="Approved">Approved</option>
+              <option value="Published">Published</option>
+            </select>
+          </div>
+          <div>
+            <label class="ac-label">Notes</label>
+            <input id="ac-f-notes" class="ac-input" placeholder="Edge cases, variants, decisions…">
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:1.25rem;justify-content:flex-end">
+          <button onclick="closeAcModal()" style="font-size:12px;padding:7px 16px;border-radius:20px;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer">Cancel</button>
+          <button onclick="saveAcEntry()" style="font-size:12px;padding:7px 16px;border-radius:20px;background:#2977FF;color:#fff;border:none;cursor:pointer">Save component</button>
+        </div>
+      </div>
     </div>
 
     <div id="panel-audits" class="panel">
@@ -1749,6 +1902,7 @@ function gatherState() {
   return {
     tracker_status:  TRACKER_STATUS,
     page_status:     PAGE_STATUS,
+    ac_entries:      AC_ENTRIES,
     tracker_notes:   TRACKER_NOTES,
     tracker_uitcomp: window.TRACKER_UIT_COMP || {},
     deliverables:    DELIVERABLE_STATE,
@@ -1764,17 +1918,21 @@ function applyState(state) {
   if(state.tracker_uitcomp) Object.assign(window.TRACKER_UIT_COMP, state.tracker_uitcomp);
   if(state.deliverables)    Object.assign(DELIVERABLE_STATE, state.deliverables);
   if(state.page_status)     Object.assign(PAGE_STATUS, state.page_status);
+  if(state.ac_entries)      { AC_ENTRIES.length = 0; state.ac_entries.forEach(e => AC_ENTRIES.push(e)); }
   if(state.mapping_notes)   Object.assign(MAPPING_NOTES, state.mapping_notes);
   // persist to localStorage
   saveTrackerState();
   localStorage.setItem('cs_deliverables', JSON.stringify(DELIVERABLE_STATE));
   localStorage.setItem('cs_mapping_notes', JSON.stringify(MAPPING_NOTES));
   localStorage.setItem('cs_page_status', JSON.stringify(PAGE_STATUS));
+  localStorage.setItem('cs_ac_entries', JSON.stringify(AC_ENTRIES));
   // re-render
   document.getElementById('trk-body').innerHTML = '';
   buildTrackerRows();
   restoreDeliverables();
   buildMapping();
+  buildStructures(STR_PAGES);
+  renderAc();
   updateTrackerSummary();
 }
 
@@ -2077,6 +2235,136 @@ function filterStructures() {
 }
 
 buildStructures(STR_PAGES);
+
+
+// ─── APPROVED COMPONENTS ─────────────────────────────────────────────────
+let AC_ENTRIES = JSON.parse(localStorage.getItem('cs_ac_entries') || '[]');
+let AC_EDIT_IDX = null;
+
+function saveAcEntries() {
+  localStorage.setItem('cs_ac_entries', JSON.stringify(AC_ENTRIES));
+  scheduleSync();
+}
+
+function openAcModal(idx) {
+  AC_EDIT_IDX = idx != null ? idx : null;
+  const modal = document.getElementById('ac-modal');
+  const title = document.getElementById('ac-modal-title');
+  title.textContent = AC_EDIT_IDX != null ? 'Edit component' : 'Add component';
+  const e = AC_EDIT_IDX != null ? AC_ENTRIES[AC_EDIT_IDX] : {};
+  document.getElementById('ac-f-name').value   = e.name    || '';
+  document.getElementById('ac-f-type').value   = e.type    || 'main';
+  document.getElementById('ac-f-tier').value   = e.tier    || 'Atom';
+  document.getElementById('ac-f-parent').value = e.parent  || '';
+  document.getElementById('ac-f-uit').value    = e.uit     || '';
+  document.getElementById('ac-f-use').value    = e.use     || '';
+  document.getElementById('ac-f-page').value   = e.page    || '';
+  document.getElementById('ac-f-status').value = e.status  || 'Draft';
+  document.getElementById('ac-f-notes').value  = e.notes   || '';
+  toggleParentField();
+  modal.style.display = 'flex';
+}
+
+function closeAcModal() {
+  document.getElementById('ac-modal').style.display = 'none';
+  AC_EDIT_IDX = null;
+}
+
+function toggleParentField() {
+  const isSub = document.getElementById('ac-f-type').value === 'sub';
+  document.getElementById('ac-parent-wrap').style.display = isSub ? 'block' : 'none';
+}
+
+function saveAcEntry() {
+  const entry = {
+    name:   document.getElementById('ac-f-name').value.trim(),
+    type:   document.getElementById('ac-f-type').value,
+    tier:   document.getElementById('ac-f-tier').value,
+    parent: document.getElementById('ac-f-parent').value.trim(),
+    uit:    document.getElementById('ac-f-uit').value.trim(),
+    use:    document.getElementById('ac-f-use').value.trim(),
+    page:   document.getElementById('ac-f-page').value.trim(),
+    status: document.getElementById('ac-f-status').value,
+    notes:  document.getElementById('ac-f-notes').value.trim(),
+    id:     AC_EDIT_IDX != null ? AC_ENTRIES[AC_EDIT_IDX].id : Date.now(),
+  };
+  if(!entry.name) { document.getElementById('ac-f-name').focus(); return; }
+  if(AC_EDIT_IDX != null) { AC_ENTRIES[AC_EDIT_IDX] = entry; }
+  else { AC_ENTRIES.push(entry); }
+  saveAcEntries();
+  closeAcModal();
+  renderAc();
+}
+
+function deleteAcEntry(idx) {
+  if(!confirm('Delete "' + AC_ENTRIES[idx].name + '"?')) return;
+  AC_ENTRIES.splice(idx, 1);
+  saveAcEntries();
+  renderAc();
+}
+
+function renderAc() {
+  const body = document.getElementById('ac-body');
+  const empty = document.getElementById('ac-empty');
+  if(!body) return;
+  const q  = (document.getElementById('ac-search')?.value || '').toLowerCase();
+  const ft = document.getElementById('ac-filter-type')?.value || '';
+  const fs = document.getElementById('ac-filter-status')?.value || '';
+  const ftr= document.getElementById('ac-filter-tier')?.value || '';
+
+  const filtered = AC_ENTRIES.filter((e, i) => {
+    const mq  = !q  || e.name.toLowerCase().includes(q) || e.use.toLowerCase().includes(q) || e.page.toLowerCase().includes(q) || e.uit.toLowerCase().includes(q);
+    const mt  = !ft || e.type === ft;
+    const ms  = !fs || e.status === fs;
+    const mtr = !ftr|| e.tier === ftr;
+    return mq && mt && ms && mtr;
+  });
+
+  // update summary
+  const total     = AC_ENTRIES.length;
+  const published = AC_ENTRIES.filter(e=>e.status==='Published').length;
+  const approved  = AC_ENTRIES.filter(e=>e.status==='Approved').length;
+  const draft     = AC_ENTRIES.filter(e=>e.status==='Draft').length;
+  document.getElementById('ac-total').textContent     = total;
+  document.getElementById('ac-published').textContent = published;
+  document.getElementById('ac-approved').textContent  = approved;
+  document.getElementById('ac-draft').textContent     = draft;
+  document.getElementById('ac-count').textContent     = filtered.length + ' component' + (filtered.length !== 1 ? 's' : '');
+
+  if(!filtered.length) {
+    body.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  body.innerHTML = filtered.map(e => {
+    const realIdx = AC_ENTRIES.indexOf(e);
+    const typeBadge = e.type === 'main'
+      ? '<span class="badge ac-badge-main">Main</span>'
+      : '<span class="badge ac-badge-sub">Sub</span>';
+    const statusBadge = `<span class="badge ac-badge-${e.status.toLowerCase()}">${e.status}</span>`;
+    const tierBadge = typeBadge.includes('Atom') ? '' : `<span class="badge tmpl-blue" style="font-size:10px">${e.tier}</span>`;
+    return `<tr>
+      <td><div class="comp-name">${e.name}</div></td>
+      <td>${typeBadge}</td>
+      <td><span class="badge tmpl-blue" style="font-size:10px">${e.tier}</span></td>
+      <td style="font-size:11px;color:var(--text2)">${e.parent || '<span style="color:var(--text3)">—</span>'}</td>
+      <td style="font-size:11px;color:var(--text2)">${e.uit || '<span style="color:var(--text3)">—</span>'}</td>
+      <td style="font-size:11px;color:var(--text2)">${e.use || '<span style="color:var(--text3)">—</span>'}</td>
+      <td style="font-size:11px;color:var(--text2)">${e.page || '<span style="color:var(--text3)">—</span>'}</td>
+      <td>${statusBadge}</td>
+      <td>
+        <div class="ac-actions">
+          <button class="ac-action-btn" onclick="openAcModal(${realIdx})" title="Edit"><i class="ti ti-pencil"></i></button>
+          <button class="ac-action-btn" onclick="deleteAcEntry(${realIdx})" title="Delete"><i class="ti ti-trash"></i></button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+renderAc();
 
 
 function togglePhase(el) {
