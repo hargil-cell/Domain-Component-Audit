@@ -90,6 +90,20 @@
     "https://www.clicksend.com/gb/sms/sms-gateway-api/": "imgready",
     "https://www.clicksend.com/gb/sms/": "inprog"
   },
+  "ac_entries": [
+    {
+      "name": "Breadcrumb",
+      "type": "main",
+      "tier": "Molecule",
+      "parent": "",
+      "uit": "Built from scratch",
+      "use": "A wayfinding component that shows where the current page sits within the site's structure",
+      "page": "www.clicksend.com/sms/",
+      "status": "Approved",
+      "notes": "",
+      "id": 1789628464638
+    }
+  ],
   "tracker_notes": {
     "Primary CTA Button": "",
     "Secondary Button": "",
@@ -248,5 +262,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-09T12:13:08.220Z"
+  "saved_at": "2026-09-17T07:01:07.641Z"
 }
