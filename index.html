@@ -254,6 +254,7 @@ tbody tr:last-child td{border-bottom:none}
 .ac-action-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px;padding:2px 4px;border-radius:4px}
 .ac-action-btn:hover{color:var(--text);background:var(--bg3)}
 .ac-notes-cell{font-size:11px;color:var(--text3);font-style:italic}
+.ac-trunc{font-size:11px;color:var(--text2);max-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:default}
 .str-url-link{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:3px;flex-shrink:0;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none;cursor:pointer}
 .str-url-link:hover{color:var(--blue-text);text-decoration:underline}
 .str-status-select{font-size:10px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text);cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none;text-align:center;text-align-last:center;flex-shrink:0}
@@ -762,14 +763,15 @@ footer{text-align:center;font-size:11px;color:var(--text3);padding:2rem 0 1rem;b
         <table id="ac-table">
           <thead>
             <tr>
-              <th style="width:14%">Component name</th>
-              <th style="width:8%">Type</th>
-              <th style="width:8%">Tier</th>
-              <th style="width:14%">Parent component</th>
-              <th style="width:14%">UIT base</th>
-              <th style="width:14%">Intended use</th>
+              <th style="width:12%">Component name</th>
+              <th style="width:7%">Type</th>
+              <th style="width:7%">Tier</th>
+              <th style="width:10%">Parent component</th>
+              <th style="width:11%">UIT base</th>
               <th style="width:12%">Original use case page</th>
-              <th style="width:8%">Status</th>
+              <th style="width:14%">Intended use</th>
+              <th style="width:12%">Notes</th>
+              <th style="width:7%">Status</th>
               <th style="width:8%">Actions</th>
             </tr>
           </thead>
@@ -2349,10 +2351,11 @@ function renderAc() {
       <td><div class="comp-name">${e.name}</div></td>
       <td>${typeBadge}</td>
       <td><span class="badge tmpl-blue" style="font-size:10px">${e.tier}</span></td>
-      <td style="font-size:11px;color:var(--text2)">${e.parent || '<span style="color:var(--text3)">—</span>'}</td>
-      <td style="font-size:11px;color:var(--text2)">${e.uit || '<span style="color:var(--text3)">—</span>'}</td>
-      <td style="font-size:11px;color:var(--text2)">${e.use || '<span style="color:var(--text3)">—</span>'}</td>
-      <td style="font-size:11px;color:var(--text2)">${e.page || '<span style="color:var(--text3)">—</span>'}</td>
+      <td class="ac-trunc" title="${e.parent || ''}">${e.parent || '<span style="color:var(--text3)">—</span>'}</td>
+      <td class="ac-trunc" title="${e.uit || ''}">${e.uit || '<span style="color:var(--text3)">—</span>'}</td>
+      <td class="ac-trunc" title="${e.page || ''}">${e.page || '<span style="color:var(--text3)">—</span>'}</td>
+      <td class="ac-trunc" title="${e.use || ''}">${e.use || '<span style="color:var(--text3)">—</span>'}</td>
+      <td class="ac-trunc ac-notes-cell" title="${e.notes || ''}">${e.notes || '<span style="color:var(--text3)">—</span>'}</td>
       <td>${statusBadge}</td>
       <td>
         <div class="ac-actions">
