@@ -174,6 +174,18 @@
       "status": "Approved",
       "notes": "State (Default, Hover, Focused, Disabled, Loading, Active) Size (xl, lg, md, sm, xs)",
       "id": 1789629446090
+    },
+    {
+      "name": "Button (Icon-only)",
+      "type": "main",
+      "tier": "Atom",
+      "parent": "",
+      "uit": "Button",
+      "use": "Icon-only is a fit when the icon is instantly recognizable on its own",
+      "page": "",
+      "status": "Approved",
+      "notes": "State (Default, Hover, Focused, Disabled, Loading) Size (xl, lg, md, sm, xs)",
+      "id": 1789629542841
     }
   ],
   "tracker_notes": {
@@ -334,5 +346,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-17T07:17:29.091Z"
+  "saved_at": "2026-09-17T07:19:05.843Z"
 }
