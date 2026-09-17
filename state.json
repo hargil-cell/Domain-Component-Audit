@@ -102,6 +102,18 @@
       "status": "Approved",
       "notes": "",
       "id": 1789628464638
+    },
+    {
+      "name": "Button (Primary)",
+      "type": "main",
+      "tier": "Atom",
+      "parent": "",
+      "uit": "Button",
+      "use": "The strongest visual weight. Use for the single most important action on a page or within a section",
+      "page": "clicksend.com",
+      "status": "Approved",
+      "notes": "State (Default, Hover, Focused, Disabled, Loading, Active) Size (xl, lg, md, sm, xs) Icon-only, Microcopy",
+      "id": 1789628746875
     }
   ],
   "tracker_notes": {
@@ -262,5 +274,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-17T07:01:07.641Z"
+  "saved_at": "2026-09-17T07:05:49.877Z"
 }
