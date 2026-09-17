@@ -253,7 +253,9 @@ tbody tr:last-child td{border-bottom:none}
 .ac-actions{display:flex;gap:6px}
 .ac-action-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px;padding:2px 4px;border-radius:4px}
 .ac-action-btn:hover{color:var(--text);background:var(--bg3)}
-.ac-notes-cell{font-size:11px;color:var(--text3);font-style:italic}
+.ac-status-draft{background:var(--bg2);color:var(--text3);border-color:var(--border2)}
+.ac-status-approved{background:var(--blue-bg);color:var(--blue-text);border-color:var(--blue-border)}
+.ac-status-published{background:var(--green-bg);color:var(--green-text);border-color:var(--green-border)}
 .ac-trunc{font-size:11px;color:var(--text2);max-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:copy;position:relative}
 .ac-trunc:active{opacity:.6}
 .str-url-link{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:3px;flex-shrink:0;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none;cursor:pointer}
@@ -2299,6 +2301,13 @@ function saveAcEntry() {
   renderAc();
 }
 
+function updateAcStatus(idx, el) {
+  AC_ENTRIES[idx].status = el.value;
+  el.className = 'str-status-select ac-status-' + el.value.toLowerCase();
+  saveAcEntries();
+  renderAc();
+}
+
 function deleteAcEntry(idx) {
   if(!confirm('Delete "' + AC_ENTRIES[idx].name + '"?')) return;
   AC_ENTRIES.splice(idx, 1);
@@ -2357,7 +2366,13 @@ function renderAc() {
       <td class="ac-trunc" title="${e.page || ''}">${e.page || '<span style="color:var(--text3)">—</span>'}</td>
       <td class="ac-trunc" title="${e.use || ''}">${e.use || '<span style="color:var(--text3)">—</span>'}</td>
       <td class="ac-trunc ac-notes-cell" title="${e.notes || ''}">${e.notes || '<span style="color:var(--text3)">—</span>'}</td>
-      <td>${statusBadge}</td>
+      <td>
+        <select class="str-status-select ac-status-${e.status.toLowerCase()}" onchange="updateAcStatus(${realIdx}, this)">
+          <option value="Draft" ${e.status==='Draft'?'selected':''}>Draft</option>
+          <option value="Approved" ${e.status==='Approved'?'selected':''}>Approved</option>
+          <option value="Published" ${e.status==='Published'?'selected':''}>Published</option>
+        </select>
+      </td>
       <td>
         <div class="ac-actions">
           <button class="ac-action-btn" onclick="openAcModal(${realIdx})" title="Edit"><i class="ti ti-pencil"></i></button>
