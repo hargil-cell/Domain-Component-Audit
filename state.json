@@ -99,7 +99,7 @@
       "uit": "Built from scratch",
       "use": "A wayfinding component that shows where the current page sits within the site's structure",
       "page": "www.clicksend.com/sms/",
-      "status": "Approved",
+      "status": "Draft",
       "notes": "",
       "id": 1789628464638
     },
@@ -346,5 +346,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-09-17T07:21:56.168Z"
+  "saved_at": "2026-09-17T07:25:31.682Z"
 }
