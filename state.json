@@ -104,7 +104,8 @@
     "https://www.clicksend.com/en/post/": "inprog",
     "https://www.clicksend.com/en/features/": "ready",
     "https://www.clicksend.com/en/ai-messaging/": "imgready",
-    "https://www.clicksend.com/en/mms/": "inprog"
+    "https://www.clicksend.com/en/mms/": "inprog",
+    "https://www.clicksend.com/en/sms/smpp-gateway/": "inprog"
   },
   "ac_entries": [
     {
@@ -362,5 +363,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-07T16:52:43.367Z"
+  "saved_at": "2026-10-07T17:17:42.341Z"
 }
