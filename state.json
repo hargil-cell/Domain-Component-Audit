@@ -95,7 +95,8 @@
     "https://www.clicksend.com/en/sms/sms-gateway-api/": "imgready",
     "https://www.clicksend.com/en/sms/sms-broadcast/": "imgready",
     "https://www.clicksend.com/en/sms/two-way-messaging/": "imgready",
-    "https://www.clicksend.com/en/sms/online-sms-gateway/": "imgready"
+    "https://www.clicksend.com/en/sms/online-sms-gateway/": "imgready",
+    "https://www.clicksend.com/en/sms/email-to-sms/": "imgready"
   },
   "ac_entries": [
     {
@@ -353,5 +354,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-07T15:49:00.648Z"
+  "saved_at": "2026-10-07T15:49:04.636Z"
 }
