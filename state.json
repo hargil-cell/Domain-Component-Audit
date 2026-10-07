@@ -89,7 +89,7 @@
     "https://www.clicksend.com/gb/sms/sms-marketing/": "copyready",
     "https://www.clicksend.com/gb/sms/sms-gateway-api/": "imgready",
     "https://www.clicksend.com/gb/sms/": "inprog",
-    "https://www.clicksend.com/en/sms/": "inprog"
+    "https://www.clicksend.com/en/sms/": "imgready"
   },
   "ac_entries": [
     {
@@ -347,5 +347,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-07T10:06:08.696Z"
+  "saved_at": "2026-10-07T11:01:01.566Z"
 }
