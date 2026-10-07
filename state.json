@@ -97,7 +97,7 @@
     "https://www.clicksend.com/en/sms/two-way-messaging/": "imgready",
     "https://www.clicksend.com/en/sms/online-sms-gateway/": "imgready",
     "https://www.clicksend.com/en/sms/email-to-sms/": "imgready",
-    "https://www.clicksend.com/en/email/": "inprog",
+    "https://www.clicksend.com/en/email/": "ready",
     "https://www.clicksend.com/en/rich-messaging/": "imgready"
   },
   "ac_entries": [
@@ -356,5 +356,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-07T16:15:52.035Z"
+  "saved_at": "2026-10-07T16:23:40.663Z"
 }
