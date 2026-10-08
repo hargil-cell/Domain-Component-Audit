@@ -268,6 +268,7 @@ tbody tr:last-child td{border-bottom:none}
 .str-status-select.ss-copyready{background-color:var(--amber-bg);color:var(--amber-text);border-color:var(--amber-border)}
 .str-status-select.ss-imgready{background-color:#2a1500;color:#fb923c;border-color:#7c3c0a}
 .str-status-select.ss-ready{background-color:var(--green-bg);color:var(--green-text);border-color:var(--green-border)}
+.str-status-select.ss-404{background-color:#2d0a0a;color:#f87171;border-color:#7f1d1d}
 .str-header-meta{display:flex;align-items:center;gap:8px;margin-left:auto}
 .str-progress-bar{height:4px;border-radius:2px;background:var(--bg3);margin:0 0 12px;overflow:hidden}
 .str-progress-fill{height:100%;border-radius:2px;background:var(--green-border);transition:width .3s}
@@ -2237,7 +2238,7 @@ const STR_PAGES = [
 const STR_TYPE_LABELS = {marketing:'Marketing',subproduct:'Sub-product',pricing:'Pricing',overview:'Overview',solution:'Solution detail',industry:'Industry detail',comparison:'Comparison',company:'Company',blog:'Blog',landing:'Landing page'};
 const STR_TYPE_CLASSES = {marketing:'str-b-marketing',subproduct:'str-b-subproduct',pricing:'str-b-pricing',overview:'str-b-overview',solution:'str-b-solution',industry:'str-b-industry',comparison:'str-b-overview',company:'str-b-overview',blog:'str-b-marketing',landing:'str-b-landing'};
 
-function strStatusClass(v){return{notstarted:'ss-notstarted',inprog:'ss-inprog',copyready:'ss-copyready',imgready:'ss-imgready',ready:'ss-ready'}[v]||'ss-notstarted';}
+function strStatusClass(v){return{notstarted:'ss-notstarted',inprog:'ss-inprog',copyready:'ss-copyready',imgready:'ss-imgready',ready:'ss-ready','404':'ss-404'}[v]||'ss-notstarted';}
 
 function buildStructures(pages) {
   const list = document.getElementById('str-list');
@@ -2270,6 +2271,7 @@ function buildStructures(pages) {
             <option value="inprog" ${status==='inprog'?'selected':''}>In progress</option>
             <option value="copyready" ${status==='copyready'?'selected':''}>Ready for copy</option>
             <option value="imgready" ${status==='imgready'?'selected':''}>Ready for imagery</option>
+            <option value="404" ${status==='404'?'selected':''}>404</option>
             <option value="ready" ${status==='ready'?'selected':''}>Ready ✓</option>
           </select>
         </div>
