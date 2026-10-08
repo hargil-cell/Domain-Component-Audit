@@ -110,7 +110,7 @@
     "https://www.clicksend.com/en/mms/bulk-mms-marketing/": "imgready",
     "https://www.clicksend.com/en/mms/online-mms-gateway/": "imgready",
     "https://www.clicksend.com/en/email/marketing/": "404",
-    "https://www.clicksend.com/en/email/transactional/": "ready",
+    "https://www.clicksend.com/en/email/transactional/": "404",
     "https://www.clicksend.com/en/voice/text-to-speech/": "ready",
     "https://www.clicksend.com/en/sms/api/": "ready",
     "https://www.clicksend.com/en/sms/bulk/": "ready"
@@ -371,5 +371,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T09:20:14.799Z"
+  "saved_at": "2026-10-08T09:20:23.365Z"
 }
