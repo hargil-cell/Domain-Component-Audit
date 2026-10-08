@@ -123,7 +123,8 @@
     "https://www.clicksend.com/en/pricing/": "inprog",
     "https://www.clicksend.com/en/solutions/": "ready",
     "https://www.clicksend.com/en/industries/": "ready",
-    "https://www.clicksend.com/en/industries/marketing/": "imgready"
+    "https://www.clicksend.com/en/industries/marketing/": "imgready",
+    "https://www.clicksend.com/en/industries/automotive/": "imgready"
   },
   "ac_entries": [
     {
@@ -381,5 +382,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T12:24:50.130Z"
+  "saved_at": "2026-10-08T12:40:37.317Z"
 }
