@@ -112,7 +112,8 @@
     "https://www.clicksend.com/en/email/marketing/": "ready",
     "https://www.clicksend.com/en/email/transactional/": "ready",
     "https://www.clicksend.com/en/voice/text-to-speech/": "ready",
-    "https://www.clicksend.com/en/sms/api/": "ready"
+    "https://www.clicksend.com/en/sms/api/": "ready",
+    "https://www.clicksend.com/en/sms/bulk/": "ready"
   },
   "ac_entries": [
     {
@@ -370,5 +371,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T09:13:12.816Z"
+  "saved_at": "2026-10-08T09:13:34.303Z"
 }
