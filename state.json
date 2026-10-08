@@ -109,7 +109,8 @@
     "https://www.clicksend.com/en/sms/sms-outlook-plugin/": "imgready",
     "https://www.clicksend.com/en/mms/bulk-mms-marketing/": "imgready",
     "https://www.clicksend.com/en/mms/online-mms-gateway/": "imgready",
-    "https://www.clicksend.com/en/email/marketing/": "ready"
+    "https://www.clicksend.com/en/email/marketing/": "ready",
+    "https://www.clicksend.com/en/email/transactional/": "ready"
   },
   "ac_entries": [
     {
@@ -367,5 +368,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T09:12:44.222Z"
+  "saved_at": "2026-10-08T09:12:54.303Z"
 }
