@@ -122,7 +122,8 @@
     "https://www.clicksend.com/en/sms/two-way/": "404",
     "https://www.clicksend.com/en/pricing/": "inprog",
     "https://www.clicksend.com/en/solutions/": "ready",
-    "https://www.clicksend.com/en/industries/": "ready"
+    "https://www.clicksend.com/en/industries/": "ready",
+    "https://www.clicksend.com/en/industries/marketing/": "inprog"
   },
   "ac_entries": [
     {
@@ -380,5 +381,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T11:52:27.972Z"
+  "saved_at": "2026-10-08T11:52:38.758Z"
 }
