@@ -99,7 +99,7 @@
     "https://www.clicksend.com/en/sms/email-to-sms/": "imgready",
     "https://www.clicksend.com/en/email/": "ready",
     "https://www.clicksend.com/en/rich-messaging/": "imgready",
-    "https://www.clicksend.com/en/voice/": "inprog",
+    "https://www.clicksend.com/en/voice/": "ready",
     "https://www.clicksend.com/en/fax/": "inprog",
     "https://www.clicksend.com/en/post/": "inprog",
     "https://www.clicksend.com/en/features/": "404",
@@ -377,5 +377,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T09:25:18.252Z"
+  "saved_at": "2026-10-08T09:45:11.138Z"
 }
