@@ -117,7 +117,8 @@
     "https://www.clicksend.com/en/sms/business/": "404",
     "https://www.clicksend.com/en/sms/inbound/": "404",
     "https://www.clicksend.com/en/sms/marketing/": "404",
-    "https://www.clicksend.com/en/sms/shortcodes/": "404"
+    "https://www.clicksend.com/en/sms/shortcodes/": "404",
+    "https://www.clicksend.com/en/sms/transactional/": "404"
   },
   "ac_entries": [
     {
@@ -375,5 +376,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T09:21:19.308Z"
+  "saved_at": "2026-10-08T09:21:27.307Z"
 }
