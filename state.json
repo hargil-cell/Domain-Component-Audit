@@ -107,7 +107,8 @@
     "https://www.clicksend.com/en/mms/": "inprog",
     "https://www.clicksend.com/en/sms/smpp-gateway/": "imgready",
     "https://www.clicksend.com/en/sms/sms-outlook-plugin/": "imgready",
-    "https://www.clicksend.com/en/mms/bulk-mms-marketing/": "inprog"
+    "https://www.clicksend.com/en/mms/bulk-mms-marketing/": "imgready",
+    "https://www.clicksend.com/en/mms/online-mms-gateway/": "inprog"
   },
   "ac_entries": [
     {
@@ -365,5 +366,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T08:01:22.255Z"
+  "saved_at": "2026-10-08T08:46:21.285Z"
 }
