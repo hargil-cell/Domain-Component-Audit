@@ -102,7 +102,7 @@
     "https://www.clicksend.com/en/voice/": "inprog",
     "https://www.clicksend.com/en/fax/": "inprog",
     "https://www.clicksend.com/en/post/": "inprog",
-    "https://www.clicksend.com/en/features/": "ready",
+    "https://www.clicksend.com/en/features/": "404",
     "https://www.clicksend.com/en/ai-messaging/": "imgready",
     "https://www.clicksend.com/en/mms/": "inprog",
     "https://www.clicksend.com/en/sms/smpp-gateway/": "imgready",
@@ -377,5 +377,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T09:21:33.327Z"
+  "saved_at": "2026-10-08T09:25:18.252Z"
 }
