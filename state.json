@@ -113,7 +113,8 @@
     "https://www.clicksend.com/en/email/transactional/": "404",
     "https://www.clicksend.com/en/voice/text-to-speech/": "404",
     "https://www.clicksend.com/en/sms/api/": "404",
-    "https://www.clicksend.com/en/sms/bulk/": "404"
+    "https://www.clicksend.com/en/sms/bulk/": "404",
+    "https://www.clicksend.com/en/sms/business/": "404"
   },
   "ac_entries": [
     {
@@ -371,5 +372,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T09:20:36.489Z"
+  "saved_at": "2026-10-08T09:20:46.307Z"
 }
