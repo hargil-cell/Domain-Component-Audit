@@ -124,7 +124,8 @@
     "https://www.clicksend.com/en/solutions/": "ready",
     "https://www.clicksend.com/en/industries/": "ready",
     "https://www.clicksend.com/en/industries/marketing/": "imgready",
-    "https://www.clicksend.com/en/industries/automotive/": "imgready"
+    "https://www.clicksend.com/en/industries/automotive/": "imgready",
+    "https://www.clicksend.com/en/industries/banking-and-finance/": "imgready"
   },
   "ac_entries": [
     {
@@ -382,5 +383,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T12:40:37.317Z"
+  "saved_at": "2026-10-08T12:53:32.323Z"
 }
