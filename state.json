@@ -130,7 +130,8 @@
     "https://www.clicksend.com/en/industries/beauty-solutions/": "imgready",
     "https://www.clicksend.com/en/industries/call-centres/": "imgready",
     "https://www.clicksend.com/en/industries/competitions-and-polls/": "imgready",
-    "https://www.clicksend.com/en/solutions/alerts-and-notifications/": "imgready"
+    "https://www.clicksend.com/en/solutions/alerts-and-notifications/": "imgready",
+    "https://www.clicksend.com/en/industries/ecommerce/": "imgready"
   },
   "ac_entries": [
     {
@@ -388,5 +389,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-08T15:20:18.839Z"
+  "saved_at": "2026-10-12T11:10:34.427Z"
 }
