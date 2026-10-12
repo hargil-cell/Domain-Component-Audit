@@ -132,7 +132,8 @@
     "https://www.clicksend.com/en/industries/competitions-and-polls/": "imgready",
     "https://www.clicksend.com/en/solutions/alerts-and-notifications/": "imgready",
     "https://www.clicksend.com/en/industries/ecommerce/": "imgready",
-    "https://www.clicksend.com/en/industries/education/": "imgready"
+    "https://www.clicksend.com/en/industries/education/": "imgready",
+    "https://www.clicksend.com/en/industries/emergency/": "imgready"
   },
   "ac_entries": [
     {
@@ -390,5 +391,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-12T11:30:05.118Z"
+  "saved_at": "2026-10-12T13:19:38.434Z"
 }
