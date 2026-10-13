@@ -134,7 +134,8 @@
     "https://www.clicksend.com/en/industries/ecommerce/": "imgready",
     "https://www.clicksend.com/en/industries/education/": "imgready",
     "https://www.clicksend.com/en/industries/emergency/": "imgready",
-    "https://www.clicksend.com/en/industries/government/": "imgready"
+    "https://www.clicksend.com/en/industries/government/": "imgready",
+    "https://www.clicksend.com/en/industries/healthcare/": "imgready"
   },
   "ac_entries": [
     {
@@ -392,5 +393,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-13T09:16:41.423Z"
+  "saved_at": "2026-10-13T09:35:22.772Z"
 }
