@@ -139,7 +139,8 @@
     "https://www.clicksend.com/en/industries/human-resources/": "imgready",
     "https://www.clicksend.com/en/industries/information-technology/": "imgready",
     "https://www.clicksend.com/en/industries/insurance/": "imgready",
-    "https://www.clicksend.com/en/industries/manufacturing/": "imgready"
+    "https://www.clicksend.com/en/industries/manufacturing/": "imgready",
+    "https://www.clicksend.com/en/industries/not-for-profit/": "imgready"
   },
   "ac_entries": [
     {
@@ -397,5 +398,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-14T09:27:16.978Z"
+  "saved_at": "2026-10-14T09:42:39.097Z"
 }
