@@ -148,7 +148,8 @@
     "https://www.clicksend.com/en/industries/transport-and-logistics/": "imgready",
     "https://www.clicksend.com/en/industries/travel-and-hotels/": "imgready",
     "https://www.clicksend.com/en/industries/utilities/": "imgready",
-    "https://www.clicksend.com/en/industries/finance/": "404"
+    "https://www.clicksend.com/en/industries/finance/": "404",
+    "https://www.clicksend.com/en/industries/hospitality/": "404"
   },
   "ac_entries": [
     {
@@ -406,5 +407,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-14T12:26:16.718Z"
+  "saved_at": "2026-10-14T12:26:41.483Z"
 }
