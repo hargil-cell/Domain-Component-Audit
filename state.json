@@ -154,7 +154,8 @@
     "https://www.clicksend.com/en/solutions/customer-support/": "imgready",
     "https://www.clicksend.com/en/solutions/marketing-and-lead-management/": "imgready",
     "https://www.clicksend.com/en/solutions/ordering-and-delivery/": "imgready",
-    "https://www.clicksend.com/en/solutions/reminders/": "imgready"
+    "https://www.clicksend.com/en/solutions/reminders/": "imgready",
+    "https://www.clicksend.com/en/solutions/2-factor-authentication-otp/": "imgready"
   },
   "ac_entries": [
     {
@@ -412,5 +413,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-14T14:36:51.520Z"
+  "saved_at": "2026-10-14T15:08:57.741Z"
 }
