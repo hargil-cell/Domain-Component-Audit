@@ -163,7 +163,8 @@
     "https://www.clicksend.com/en/solutions/billing-and-collections/": "imgready",
     "https://www.clicksend.com/en/solutions/2fa-authentication/": "404",
     "https://www.clicksend.com/en/solutions/alerts-notifications/": "404",
-    "https://www.clicksend.com/en/solutions/appointment-reminders/": "404"
+    "https://www.clicksend.com/en/solutions/appointment-reminders/": "404",
+    "https://www.clicksend.com/en/solutions/marketing-campaigns/": "404"
   },
   "ac_entries": [
     {
@@ -421,5 +422,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-21T09:55:30.009Z"
+  "saved_at": "2026-10-21T09:55:44.355Z"
 }
