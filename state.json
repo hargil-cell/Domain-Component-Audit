@@ -168,7 +168,8 @@
     "https://www.clicksend.com/en/clicksend-comparison/": "ready",
     "https://www.clicksend.com/en/company/": "imgready",
     "https://www.clicksend.com/en/careers/": "imgready",
-    "https://www.clicksend.com/en/about/": "404"
+    "https://www.clicksend.com/en/about/": "404",
+    "https://www.clicksend.com/en/contact/": "ready"
   },
   "ac_entries": [
     {
@@ -426,5 +427,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-21T12:29:53.060Z"
+  "saved_at": "2026-10-21T12:32:10.497Z"
 }
