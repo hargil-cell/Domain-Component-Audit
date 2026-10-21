@@ -159,7 +159,8 @@
     "https://www.clicksend.com/en/solutions/sales-automation/": "imgready",
     "https://www.clicksend.com/en/solutions/event-management/": "imgready",
     "https://www.clicksend.com/en/solutions/people-management/": "imgready",
-    "https://www.clicksend.com/en/solutions/business-continuity-sms/": "imgready"
+    "https://www.clicksend.com/en/solutions/business-continuity-sms/": "imgready",
+    "https://www.clicksend.com/en/solutions/billing-and-collections/": "imgready"
   },
   "ac_entries": [
     {
@@ -417,5 +418,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-21T09:48:26.000Z"
+  "saved_at": "2026-10-21T09:55:06.009Z"
 }
