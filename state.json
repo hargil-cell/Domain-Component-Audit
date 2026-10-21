@@ -165,7 +165,8 @@
     "https://www.clicksend.com/en/solutions/alerts-notifications/": "404",
     "https://www.clicksend.com/en/solutions/appointment-reminders/": "404",
     "https://www.clicksend.com/en/solutions/marketing-campaigns/": "404",
-    "https://www.clicksend.com/en/clicksend-comparison/": "ready"
+    "https://www.clicksend.com/en/clicksend-comparison/": "ready",
+    "https://www.clicksend.com/en/company/": "imgready"
   },
   "ac_entries": [
     {
@@ -423,5 +424,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-21T10:32:06.059Z"
+  "saved_at": "2026-10-21T10:48:19.081Z"
 }
