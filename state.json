@@ -184,7 +184,8 @@
     "https://try.clicksend.com/en/sms-gateway/": "ready",
     "https://try.clicksend.com/en/sms-api/": "404",
     "https://try.clicksend.com/en/email-to-sms/": "imgready",
-    "https://try.clicksend.com/en/sms-comparison-bulk-sms/": "404"
+    "https://try.clicksend.com/en/sms-comparison-bulk-sms/": "404",
+    "https://try.clicksend.com/en/text-marketing/": "imgready"
   },
   "ac_entries": [
     {
@@ -442,5 +443,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-23T13:34:02.903Z"
+  "saved_at": "2026-10-23T13:34:08.482Z"
 }
