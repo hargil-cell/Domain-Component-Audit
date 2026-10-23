@@ -173,7 +173,8 @@
     "https://www.clicksend.com/en/partners/": "404",
     "https://www.clicksend.com/en/reviews/": "copyready",
     "https://blog.clicksend.com/category/{slug}/": "ready",
-    "https://blog.clicksend.com/{slug}/": "ready"
+    "https://blog.clicksend.com/{slug}/": "ready",
+    "https://www.clicksend.com/en/": "inprog"
   },
   "ac_entries": [
     {
@@ -431,5 +432,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-23T10:52:59.456Z"
+  "saved_at": "2026-10-23T10:53:19.685Z"
 }
