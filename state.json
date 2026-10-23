@@ -186,7 +186,8 @@
     "https://try.clicksend.com/en/email-to-sms/": "imgready",
     "https://try.clicksend.com/en/sms-comparison-bulk-sms/": "404",
     "https://try.clicksend.com/en/text-marketing/": "imgready",
-    "https://try.clicksend.com/en/bulk-sms/": "imgready"
+    "https://try.clicksend.com/en/bulk-sms/": "imgready",
+    "https://try.clicksend.com/en/business-sms/": "imgready"
   },
   "ac_entries": [
     {
@@ -444,5 +445,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-23T13:34:13.911Z"
+  "saved_at": "2026-10-23T13:34:28.018Z"
 }
