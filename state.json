@@ -188,7 +188,8 @@
     "https://try.clicksend.com/en/text-marketing/": "imgready",
     "https://try.clicksend.com/en/bulk-sms/": "imgready",
     "https://try.clicksend.com/en/business-sms/": "imgready",
-    "https://try.clicksend.com/en/integrations/": "imgready"
+    "https://try.clicksend.com/en/integrations/": "imgready",
+    "https://try.clicksend.com/en/api/": "ready"
   },
   "ac_entries": [
     {
@@ -446,5 +447,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-23T13:34:51.590Z"
+  "saved_at": "2026-10-23T13:54:12.934Z"
 }
