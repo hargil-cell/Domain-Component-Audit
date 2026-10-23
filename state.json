@@ -177,7 +177,8 @@
     "https://www.clicksend.com/en/": "inprog",
     "https://www.clicksend.com/en/compare/clicksend-vs-twilio/": "ready",
     "https://www.clicksend.com/en/compare/clicksend-vs-plivo/": "ready",
-    "https://www.clicksend.com/en/compare/clicksend-vs-clickatell/": "ready"
+    "https://www.clicksend.com/en/compare/clicksend-vs-clickatell/": "ready",
+    "https://www.clicksend.com/en/compare/clicksend-vs-klaviyo/": "ready"
   },
   "ac_entries": [
     {
@@ -435,5 +436,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-23T11:51:45.942Z"
+  "saved_at": "2026-10-23T11:59:03.171Z"
 }
