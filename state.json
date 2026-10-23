@@ -179,7 +179,8 @@
     "https://www.clicksend.com/en/compare/clicksend-vs-plivo/": "ready",
     "https://www.clicksend.com/en/compare/clicksend-vs-clickatell/": "ready",
     "https://www.clicksend.com/en/compare/clicksend-vs-klaviyo/": "ready",
-    "https://try.clicksend.com/en/smb-sms-guide/": "ready"
+    "https://try.clicksend.com/en/smb-sms-guide/": "ready",
+    "https://try.clicksend.com/en/marketers-sms-guide/": "ready"
   },
   "ac_entries": [
     {
@@ -437,5 +438,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-23T12:46:08.833Z"
+  "saved_at": "2026-10-23T12:56:17.881Z"
 }
