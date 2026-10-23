@@ -175,7 +175,8 @@
     "https://blog.clicksend.com/category/{slug}/": "ready",
     "https://blog.clicksend.com/{slug}/": "ready",
     "https://www.clicksend.com/en/": "inprog",
-    "https://www.clicksend.com/en/compare/clicksend-vs-twilio/": "ready"
+    "https://www.clicksend.com/en/compare/clicksend-vs-twilio/": "ready",
+    "https://www.clicksend.com/en/compare/clicksend-vs-plivo/": "ready"
   },
   "ac_entries": [
     {
@@ -433,5 +434,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-23T11:26:33.816Z"
+  "saved_at": "2026-10-23T11:39:05.775Z"
 }
