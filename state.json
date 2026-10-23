@@ -183,7 +183,8 @@
     "https://try.clicksend.com/en/marketers-sms-guide/": "ready",
     "https://try.clicksend.com/en/sms-gateway/": "ready",
     "https://try.clicksend.com/en/sms-api/": "404",
-    "https://try.clicksend.com/en/email-to-sms/": "imgready"
+    "https://try.clicksend.com/en/email-to-sms/": "imgready",
+    "https://try.clicksend.com/en/sms-comparison-bulk-sms/": "404"
   },
   "ac_entries": [
     {
@@ -441,5 +442,5 @@
     "p2-1": true
   },
   "mapping_notes": {},
-  "saved_at": "2026-10-23T13:24:11.610Z"
+  "saved_at": "2026-10-23T13:34:02.903Z"
 }
